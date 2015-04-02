@@ -21,11 +21,13 @@ public class Chess {
         Pieces blackPieces = new Pieces(board, 0);
 
         if(inputPlayerColour().equals("white")){
-            firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, secondPlayer);
+            firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
             secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
+            firstPlayer.setOpponent(secondPlayer);
         }else{
-            firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, secondPlayer);
+            firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
             secondPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, firstPlayer);
+            firstPlayer.setOpponent(secondPlayer);
         }
 
     }
