@@ -13,11 +13,15 @@ public class King extends Piece {
         if(getColour() == PieceCode.WHITE){
             return whiteKing();
         }else{
-            blackKing();
+            return blackKing();
         }
     }
 
     public ArrayList<Move> whiteKing(){
+        int x = getX();
+        int y = getY();
+        ArrayList<Move> vector = new ArrayList<>();
+
 
     }
 
