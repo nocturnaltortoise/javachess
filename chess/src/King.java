@@ -10,6 +10,18 @@ public class King extends Piece {
     }
 
     public ArrayList<Move> availableMoves(){
+        if(getColour() == PieceCode.WHITE){
+            return whiteKing();
+        }else{
+            blackKing();
+        }
+    }
+
+    public ArrayList<Move> whiteKing(){
+
+    }
+
+    public ArrayList<Move> blackKing(){
 
     }
 
