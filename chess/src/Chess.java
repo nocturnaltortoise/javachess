@@ -10,8 +10,8 @@ public class Chess implements Display{
 
     public static void main(String[] args){
 
-        HumanPlayer firstPlayer;
-        HumanPlayer secondPlayer;
+        HumanPlayer firstPlayer = null;
+        HumanPlayer secondPlayer = null;
 
         String firstPlayerName = inputPlayerName();
         String secondPlayerName = inputPlayerName();
@@ -21,24 +21,31 @@ public class Chess implements Display{
         Pieces whitePieces = new Pieces(board, 1);
         Pieces blackPieces = new Pieces(board, 0);
 
-        if(inputPlayerColour().equals("white")){
-            firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
-            secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
-            firstPlayer.setOpponent(secondPlayer);
-        }else{
-            firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
-            secondPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, firstPlayer);
-            firstPlayer.setOpponent(secondPlayer);
-        }
-
-        Piece[][] piecesOnBoard = new Piece[4][8];
-
-        for(int i=0; i < whitePieces.getNumPieces(); i++){
-
+        boolean asking = true;
+        while(asking){
+            String playerColourChoice = inputPlayerColour();
+            if(playerColourChoice.equals("white")){
+                firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
+                secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
+                firstPlayer.setOpponent(secondPlayer);
+                asking=false;
+            }else if(playerColourChoice.equals("black")){
+                firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
+                secondPlayer = new HumanPlayer(secondPlayerName, whitePieces, board, firstPlayer);
+                firstPlayer.setOpponent(secondPlayer);
+                asking=false;
+            } else {
+                System.out.println("Enter a valid colour (black or white).");
+            }
         }
 
         Chess chess = new Chess();
-//        chess.showPiecesOnBoard();
+        System.out.println("White pieces are lower case, Black pieces are uppercase.");
+        chess.showPiecesOnBoard(board.getData());
+
+        //testing basic setup.
+        System.out.println(firstPlayer.toString() + ": " + firstPlayer.getPieces().toString() + ", " + firstPlayer.getOpponent());
+        System.out.println(secondPlayer.toString() + ": " + secondPlayer.getPieces().toString() + ", " + secondPlayer.getOpponent());
 
     }
 
@@ -53,16 +60,27 @@ public class Chess implements Display{
 
         if(colour.equalsIgnoreCase("white")){
             return "white";
+        }else if(colour.equalsIgnoreCase("black")){
+            return "black";
+        }else{
+            return "invalid string";
         }
-        return "black";
+
     }
 
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
+        System.out.println();
         for(Piece[] pieces : piecesOnBoard){
             for(Piece piece : pieces){
-                System.out.print(piece);
+                System.out.print("|");
+                if(piece == null){
+                    System.out.print(" ");
+                }else {
+                    System.out.print(piece);
+                }
             }
             System.out.println();
         }
+        System.out.println();
     }
 }
