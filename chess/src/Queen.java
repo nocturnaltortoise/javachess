@@ -11,7 +11,7 @@ public class Queen extends Piece {
     }
 
     public ArrayList<Move> availableMoves(){
-
+        return null;
     }
 
 }

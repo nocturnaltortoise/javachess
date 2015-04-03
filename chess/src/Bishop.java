@@ -10,6 +10,6 @@ public class Bishop extends Piece{
     }
 
     public ArrayList<Move> availableMoves(){
-
+        return null;
     }
 }

@@ -10,7 +10,7 @@ public class Rook extends Piece {
     }
 
     public ArrayList<Move> availableMoves(){
-
+        return null;
     }
 
 }

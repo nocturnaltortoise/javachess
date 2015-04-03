@@ -22,11 +22,23 @@ public class King extends Piece {
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
 
+        if(y==7 || x==7){
+            return null;
+        }
 
+        if(getBoard().outOfRange(x,y+1) || getBoard().outOfRange(x+1,y) || getBoard().outOfRange(x-1,y)){
+            return null;
+        }
+
+
+        if(vector.isEmpty()){
+            return null;
+        }
+        return vector;
     }
 
     public ArrayList<Move> blackKing(){
-
+        return null;
     }
 
 }

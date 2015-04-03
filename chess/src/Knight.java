@@ -11,6 +11,6 @@ public class Knight extends Piece {
     }
 
     public ArrayList<Move> availableMoves(){
-
+        return null;
     }
 }
