@@ -70,17 +70,32 @@ public class Chess implements Display{
 
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
         System.out.println();
-        for(Piece[] pieces : piecesOnBoard){
-            for(Piece piece : pieces){
+        int i,j = 0;
+
+        for(i = 0; i < piecesOnBoard[j].length; i++){
+            for(j = 0; j < piecesOnBoard.length-1; j++){
                 System.out.print("|");
-                if(piece == null){
+                if(piecesOnBoard[j][i] == null){
                     System.out.print(" ");
-                }else {
-                    System.out.print(piece);
+                }else{
+                    System.out.print(piecesOnBoard[j][i]);
                 }
             }
             System.out.println();
         }
-        System.out.println();
+
+        //rip in pepperonis old code, enhanced for loop made chess look weird
+//        for(Piece[] pieces : piecesOnBoard){
+//            for(Piece piece : pieces){
+//                System.out.print("|");
+//                if(piece == null){
+//                    System.out.print(" ");
+//                }else {
+//                    System.out.print(piece);
+//                }
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
     }
 }
