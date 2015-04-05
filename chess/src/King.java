@@ -21,24 +21,154 @@ public class King extends Piece {
         int x = getX();
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
+        Move legalMove;
 
-        if(y==7 || x==7){
+        if(getBoard().outOfRange(x,y+1)
+                || getBoard().outOfRange(x+1,y)
+                || getBoard().outOfRange(x-1,y)
+                || getBoard().outOfRange(x+1,y+1)
+                || getBoard().outOfRange(x-1,y-1)
+                || getBoard().outOfRange(x-1,y+1)
+                || getBoard().outOfRange(x+1,y-1)){
             return null;
         }
 
-        if(getBoard().outOfRange(x,y+1) || getBoard().outOfRange(x+1,y) || getBoard().outOfRange(x-1,y)){
-            return null;
+        if(!getBoard().outOfRange(x,y+1)){
+            if(getBoard().occupied(x,y+1) && (getBoard().getPiece(x,y+1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x, y+1, true);
+            }else{
+                legalMove = new Move(this, x, y, x, y+1, false);
+            }
+            vector.add(legalMove);
         }
 
+        if(!getBoard().outOfRange(x+1,y)){
+            if(getBoard().occupied(x+1,y) && (getBoard().getPiece(x+1,y).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x+1, y, true);
+            }else{
+                legalMove = new Move(this, x, y, x+1, y, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x+1,y+1)){
+            if(getBoard().occupied(x+1,y+1) && (getBoard().getPiece(x+1,y+1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x+1, y+1, true);
+            }else{
+                legalMove = new Move(this, x, y, x+1, y+1, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x-1,y+1)){
+            if(getBoard().occupied(x-1,y+1) && (getBoard().getPiece(x-1,y+1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x-1, y+1, true);
+            }else{
+                legalMove = new Move(this, x, y, x-1, y+1, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x+1,y-1)){
+            if(getBoard().occupied(x+1,y-1) && (getBoard().getPiece(x+1,y-1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x+1, y-1, true);
+            }else{
+                legalMove = new Move(this, x, y, x+1, y-1, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x-1,y-1)){
+            if(getBoard().occupied(x-1,y-1) && (getBoard().getPiece(x-1,y-1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x-1, y-1, true);
+            }else{
+                legalMove = new Move(this, x, y, x-1, y-1, false);
+            }
+            vector.add(legalMove);
+        }
 
         if(vector.isEmpty()){
             return null;
         }
+
         return vector;
     }
 
     public ArrayList<Move> blackKing(){
-        return null;
+        int x = getX();
+        int y = getY();
+        ArrayList<Move> vector = new ArrayList<>();
+        Move legalMove;
+
+        if(getBoard().outOfRange(x,y+1)
+                || getBoard().outOfRange(x+1,y)
+                || getBoard().outOfRange(x-1,y)
+                || getBoard().outOfRange(x+1,y+1)
+                || getBoard().outOfRange(x-1,y-1)
+                || getBoard().outOfRange(x-1,y+1)
+                || getBoard().outOfRange(x+1,y-1)){
+            return null;
+        }
+
+        if(!getBoard().outOfRange(x,y+1)){
+            if(getBoard().occupied(x,y+1) && (getBoard().getPiece(x,y+1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x, y+1, true);
+            }else{
+                legalMove = new Move(this, x, y, x, y+1, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x+1,y)){
+            if(getBoard().occupied(x+1,y) && (getBoard().getPiece(x+1,y).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x+1, y, true);
+            }else{
+                legalMove = new Move(this, x, y, x+1, y, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x+1,y+1)){
+            if(getBoard().occupied(x+1,y+1) && (getBoard().getPiece(x+1,y+1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x+1, y+1, true);
+            }else{
+                legalMove = new Move(this, x, y, x+1, y+1, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x-1,y+1)){
+            if(getBoard().occupied(x-1,y+1) && (getBoard().getPiece(x-1,y+1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x-1, y+1, true);
+            }else{
+                legalMove = new Move(this, x, y, x-1, y+1, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x+1,y-1)){
+            if(getBoard().occupied(x+1,y-1) && (getBoard().getPiece(x+1,y-1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x+1, y-1, true);
+            }else{
+                legalMove = new Move(this, x, y, x+1, y-1, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x-1,y-1)){
+            if(getBoard().occupied(x-1,y-1) && (getBoard().getPiece(x-1,y-1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x-1, y-1, true);
+            }else{
+                legalMove = new Move(this, x, y, x-1, y-1, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(vector.isEmpty()){
+            return null;
+        }
+
+        return vector;
     }
 
 }

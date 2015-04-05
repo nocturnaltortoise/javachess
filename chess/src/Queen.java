@@ -14,4 +14,11 @@ public class Queen extends Piece {
         return null;
     }
 
+    public ArrayList<Move> whiteQueen(){
+
+    }
+
+    public ArrayList<Move> blackQueen(){
+
+    }
 }

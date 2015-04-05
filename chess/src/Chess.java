@@ -74,9 +74,8 @@ public class Chess implements Display{
 
         for(i = 0; i < piecesOnBoard[j].length; i++){
             for(j = 0; j < piecesOnBoard.length-1; j++){
-                System.out.print("|");
                 if(piecesOnBoard[j][i] == null){
-                    System.out.print(" ");
+                    System.out.print("-");
                 }else{
                     System.out.print(piecesOnBoard[j][i]);
                 }

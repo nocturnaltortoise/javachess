@@ -13,4 +13,12 @@ public class Rook extends Piece {
         return null;
     }
 
+    public ArrayList<Move> whiteRook(){
+
+    }
+
+    public ArrayList<Move> blackRook(){
+
+    }
+
 }

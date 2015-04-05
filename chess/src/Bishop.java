@@ -12,4 +12,13 @@ public class Bishop extends Piece{
     public ArrayList<Move> availableMoves(){
         return null;
     }
+
+    //gonna need some kind of loop (while?) to check squares on diagonals up to board edges/occupied square
+    public ArrayList<Move> whiteBishop(){
+
+    }
+
+    public ArrayList<Move> blackBishop(){
+
+    }
 }

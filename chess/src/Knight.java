@@ -13,4 +13,12 @@ public class Knight extends Piece {
     public ArrayList<Move> availableMoves(){
         return null;
     }
+
+    public ArrayList<Move> whiteKnight(){
+
+    }
+
+    public ArrayList<Move> blackKnight(){
+
+    }
 }
