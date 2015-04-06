@@ -15,10 +15,10 @@ public class Queen extends Piece {
     }
 
     public ArrayList<Move> whiteQueen(){
-
+        return null;
     }
 
     public ArrayList<Move> blackQueen(){
-
+        return null;
     }
 }

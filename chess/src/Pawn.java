@@ -48,13 +48,13 @@ public class Pawn extends Piece {
         // set up m to refer to a Move object
         Move m = null;
 
-        if (firstMove) {
-            if(!getBoard().occupied(x,y+2)){
-                m = new Move(this, x, y, x, y+2, false);
-                v.add(m);
-                firstMove = false;
-            }
-        }
+//        if (firstMove) {
+//            if(!getBoard().occupied(x,y+2)){
+//                m = new Move(this, x, y, x, y+2, false);
+//                v.add(m);
+//                firstMove = false;
+//            }
+//        }
 
         // first legal move is to go from x,y to x,y+1 if x,y+1 is unoccupied
         if (!getBoard().occupied(x,y+1)) {
@@ -110,13 +110,13 @@ public class Pawn extends Piece {
         // set up m to refer to a Move object
         Move m = null;
 
-        if (firstMove) {
-            if(!getBoard().occupied(x,y+2)){
-                m = new Move(this, x, y, x, y+2, false);
-                v.add(m);
-                firstMove = false;
-            }
-        }
+//        if (firstMove) {
+//            if(!getBoard().occupied(x,y+2)){
+//                m = new Move(this, x, y, x, y+2, false);
+//                v.add(m);
+//                firstMove = false;
+//            }
+//        }
 
         // first legal move is to go from x,y to x,y+1 if x,y+1 is unoccupied
         if (!getBoard().occupied(x,y-1)) {

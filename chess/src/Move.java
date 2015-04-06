@@ -52,4 +52,30 @@ public class Move {
                 + " Target Occupied? " + isOccupied;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Move move = (Move) o;
+
+        if (currentXPosition != move.currentXPosition) return false;
+        if (currentYPosition != move.currentYPosition) return false;
+        if (newXPosition != move.newXPosition) return false;
+        if (newYPosition != move.newYPosition) return false;
+        if (isOccupied != move.isOccupied) return false;
+        return piece.equals(move.piece);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = piece.hashCode();
+        result = 31 * result + currentXPosition;
+        result = 31 * result + currentYPosition;
+        result = 31 * result + newXPosition;
+        result = 31 * result + newYPosition;
+        result = 31 * result + (isOccupied ? 1 : 0);
+        return result;
+    }
 }

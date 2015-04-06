@@ -47,6 +47,13 @@ public class Chess implements Display{
         System.out.println(firstPlayer.toString() + ": " + firstPlayer.getPieces().toString() + ", " + firstPlayer.getOpponent());
         System.out.println(secondPlayer.toString() + ": " + secondPlayer.getPieces().toString() + ", " + secondPlayer.getOpponent());
 
+        //String[][] test = firstPlayer.getMove();
+
+        //System.out.println(test[0][0] + test[0][1] + ":" + test[1][0] + test[1][1]);
+
+        firstPlayer.makeMove();
+        chess.showPiecesOnBoard(board.getData());
+
     }
 
     private static String inputPlayerName(){
@@ -65,13 +72,21 @@ public class Chess implements Display{
         System.out.println();
         int i,j = 0;
 
+        int gridRef = 0;
+
+        System.out.println(" ABCDEFG");
+
         for(i = 0; i < piecesOnBoard[j].length; i++){
+            System.out.print(gridRef);
+            gridRef++;
             for(j = 0; j < piecesOnBoard.length-1; j++){
+
                 if(piecesOnBoard[j][i] == null){
                     System.out.print("-");
                 }else{
                     System.out.print(piecesOnBoard[j][i]);
                 }
+
             }
             System.out.println();
         }
