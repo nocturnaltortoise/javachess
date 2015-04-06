@@ -10,6 +10,7 @@ public class Knight extends Piece {
         super(PieceCode.KNIGHT, x, y, colour, b);
     }
 
+    @Override
     public ArrayList<Move> availableMoves(){
         return null;
     }

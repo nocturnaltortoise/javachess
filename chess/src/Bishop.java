@@ -9,6 +9,7 @@ public class Bishop extends Piece{
         super(PieceCode.BISHOP,x,y,colour,board);
     }
 
+    @Override
     public ArrayList<Move> availableMoves(){
         if(getColour() == PieceCode.WHITE){
             return whiteBishop();

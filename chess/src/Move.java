@@ -64,7 +64,7 @@ public class Move {
         if (newXPosition != move.newXPosition) return false;
         if (newYPosition != move.newYPosition) return false;
         if (isOccupied != move.isOccupied) return false;
-        return piece.equals(move.piece);
+        return piece == move.piece;
 
     }
 

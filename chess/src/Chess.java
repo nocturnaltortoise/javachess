@@ -68,6 +68,7 @@ public class Chess implements Display{
         return colour;
     }
 
+    @Override
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
         System.out.println();
         int i,j = 0;

@@ -9,6 +9,7 @@ public class King extends Piece {
         super(PieceCode.KING, x, y, colour, board);
     }
 
+    @Override
     public ArrayList<Move> availableMoves(){
         if(getColour() == PieceCode.WHITE){
             return whiteKing();

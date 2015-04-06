@@ -10,6 +10,7 @@ public class Queen extends Piece {
         super(PieceCode.QUEEN, x, y, colour, b);
     }
 
+    @Override
     public ArrayList<Move> availableMoves(){
         return null;
     }

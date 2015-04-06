@@ -27,6 +27,7 @@ public class Pawn extends Piece {
     }
 
     // method implements abstract method in Piece class
+    @Override
     public ArrayList<Move> availableMoves() {
         if (getColour()==PieceCode.WHITE) return whitePawn();
         else return blackPawn();

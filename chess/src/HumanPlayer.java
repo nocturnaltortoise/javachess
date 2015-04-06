@@ -11,6 +11,7 @@ public class HumanPlayer extends Player{
         super(n,p,b,o);
     }
 
+    @Override
     public boolean makeMove(){
         //returns true when move takes the king.
         String[][] move = getMove();
