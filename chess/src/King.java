@@ -24,15 +24,18 @@ public class King extends Piece {
         ArrayList<Move> vector = new ArrayList<>();
         Move legalMove;
 
-        if(getBoard().outOfRange(x,y+1)
-                || getBoard().outOfRange(x+1,y)
-                || getBoard().outOfRange(x-1,y)
-                || getBoard().outOfRange(x+1,y+1)
-                || getBoard().outOfRange(x-1,y-1)
-                || getBoard().outOfRange(x-1,y+1)
-                || getBoard().outOfRange(x+1,y-1)){
-            return null;
-        }
+//        if(getBoard().outOfRange(x,y+1)
+//                || getBoard().outOfRange(x+1,y)
+//                || getBoard().outOfRange(x-1,y)
+//                || getBoard().outOfRange(x+1,y+1)
+//                || getBoard().outOfRange(x-1,y-1)
+//                || getBoard().outOfRange(x-1,y+1)
+//                || getBoard().outOfRange(x+1,y-1)){
+//            return vector;
+//        }
+        //if you're returning an empty arraylist when there are no moves possible, there's no point to this I think?
+        // Also it causes problems in it's current state - would need to check whether the move takes the King off the board,
+        //not if *any* possible move takes it off the board.
 
         if(!getBoard().outOfRange(x,y+1)){
             if(getBoard().occupied(x,y+1) && (getBoard().getPiece(x,y+1).getColour() != this.getColour())){
@@ -88,9 +91,9 @@ public class King extends Piece {
             vector.add(legalMove);
         }
 
-        if(vector.isEmpty()){
-            return null;
-        }
+//        if(vector.isEmpty()){
+//            return null;
+//        }
 
         return vector;
     }

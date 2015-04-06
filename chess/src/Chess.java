@@ -53,6 +53,8 @@ public class Chess implements Display{
 
         firstPlayer.makeMove();
         chess.showPiecesOnBoard(board.getData());
+        firstPlayer.makeMove();
+        chess.showPiecesOnBoard(board.getData());
 
     }
 
@@ -71,16 +73,17 @@ public class Chess implements Display{
     @Override
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
         System.out.println();
-        int i,j = 0;
+        int i = 0;
+        int j = 1;
 
         int gridRef = 0;
 
-        System.out.println(" ABCDEFG");
+        System.out.println(" ABCDEFGH");
 
-        for(i = 0; i < piecesOnBoard[j].length; i++){
+        for(i = 0; i < piecesOnBoard[j-1].length; i++){
             System.out.print(gridRef);
             gridRef++;
-            for(j = 0; j < piecesOnBoard.length-1; j++){
+            for(j = 0; j < piecesOnBoard.length; j++){
 
                 if(piecesOnBoard[j][i] == null){
                     System.out.print("-");

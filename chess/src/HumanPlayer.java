@@ -77,6 +77,8 @@ public class HumanPlayer extends Player{
                 return 5;
             case "g":
                 return 6;
+            case "h":
+                return 7;
             default:
                 return 10;
                 //only way this would happen would be if the letter isn't a grid ref - should error check for this

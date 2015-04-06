@@ -37,14 +37,13 @@ public class Pawn extends Piece {
     private ArrayList<Move> whitePawn() {
         int x = getX();
         int y = getY();
-
-        // return null if the pawn is at the edge of the board, or if the
-        // next move takes it out of range
-        if (y==7) return null;
-        if (getBoard().outOfRange(x,y+1)) return null;
-
-        // otherwise create a new vector to store legal moves
+        // create a new vector to store legal moves
         ArrayList<Move> v = new ArrayList<Move>();
+
+        // return an empty arraylist if the pawn is at the edge of the board, or if the
+        // next move takes it out of range
+        if (y==7) return v;
+        if (getBoard().outOfRange(x,y+1)) return v;
 
         // set up m to refer to a Move object
         Move m = null;
@@ -100,13 +99,12 @@ public class Pawn extends Piece {
     private ArrayList<Move> blackPawn() {
         int x = getX();
         int y = getY();
-
-        // return null if the pawn is at the edge of the board, or if the
-        // next move takes it out of range
-        if (y==0) return null;
-        if (getBoard().outOfRange(x,y-1)) return null;
-
         ArrayList<Move> v = new ArrayList<Move>();
+
+        // return an empty arraylist if the pawn is at the edge of the board, or if the
+        // next move takes it out of range
+        if (y==0) return v;
+        if (getBoard().outOfRange(x,y-1)) return v;
 
         // set up m to refer to a Move object
         Move m = null;
