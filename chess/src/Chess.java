@@ -24,12 +24,12 @@ public class Chess implements Display{
         boolean asking = true;
         while(asking){
             String playerColourChoice = inputPlayerColour();
-            if(playerColourChoice.equals("white")){
+            if(playerColourChoice.equalsIgnoreCase("white")){
                 firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
                 secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 asking=false;
-            }else if(playerColourChoice.equals("black")){
+            }else if(playerColourChoice.equalsIgnoreCase("black")){
                 firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
                 secondPlayer = new HumanPlayer(secondPlayerName, whitePieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
@@ -58,14 +58,7 @@ public class Chess implements Display{
         System.out.println("Choose a colour, white or black: ");
         String colour = keyboard.next();
 
-        if(colour.equalsIgnoreCase("white")){
-            return "white";
-        }else if(colour.equalsIgnoreCase("black")){
-            return "black";
-        }else{
-            return "invalid string";
-        }
-
+        return colour;
     }
 
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
@@ -82,19 +75,5 @@ public class Chess implements Display{
             }
             System.out.println();
         }
-
-        //rip in pepperonis old code, enhanced for loop made chess look weird
-//        for(Piece[] pieces : piecesOnBoard){
-//            for(Piece piece : pieces){
-//                System.out.print("|");
-//                if(piece == null){
-//                    System.out.print(" ");
-//                }else {
-//                    System.out.print(piece);
-//                }
-//            }
-//            System.out.println();
-//        }
-//        System.out.println();
     }
 }

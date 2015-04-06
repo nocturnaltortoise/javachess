@@ -45,4 +45,11 @@ public class Move {
         return isOccupied;
     }
 
+    public String toString(){
+        return "Piece: " + piece.toString()
+                + " Moving from: " + currentXPosition + ", " + currentYPosition
+                + " To: " + newXPosition + ", " + newYPosition
+                + " Target Occupied? " + isOccupied;
+    }
+
 }

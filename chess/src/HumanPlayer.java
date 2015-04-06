@@ -8,6 +8,8 @@ public class HumanPlayer extends Player{
     }
 
     public boolean makeMove(){
+        //assumedly returns true when the move can be made - only has access to the things in humanplayer's constructor to check if a move is valid.
+
         return false;
     }
 }
