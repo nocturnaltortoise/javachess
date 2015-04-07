@@ -10,6 +10,8 @@ public class Chess implements Display{
 
     public static void main(String[] args){
 
+        //TODO: should all of this be in main?
+
         HumanPlayer firstPlayer = null;
         HumanPlayer secondPlayer = null;
 
@@ -47,14 +49,20 @@ public class Chess implements Display{
         System.out.println(firstPlayer.toString() + ": " + firstPlayer.getPieces().toString() + ", " + firstPlayer.getOpponent());
         System.out.println(secondPlayer.toString() + ": " + secondPlayer.getPieces().toString() + ", " + secondPlayer.getOpponent());
 
-        //String[][] test = firstPlayer.getMove();
+        boolean gameRunning = true;
 
-        //System.out.println(test[0][0] + test[0][1] + ":" + test[1][0] + test[1][1]);
-
-        firstPlayer.makeMove();
-        chess.showPiecesOnBoard(board.getData());
-        firstPlayer.makeMove();
-        chess.showPiecesOnBoard(board.getData());
+        while(gameRunning){
+            System.out.println("Player One's Move");
+            if(firstPlayer.makeMove()){
+                gameRunning = false;
+            }
+            chess.showPiecesOnBoard(board.getData());
+            System.out.println("Player Two's Move");
+            if(secondPlayer.makeMove()){
+                gameRunning = false;
+            }
+            chess.showPiecesOnBoard(board.getData());
+        }
 
     }
 

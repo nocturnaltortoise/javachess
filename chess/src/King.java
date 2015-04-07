@@ -24,6 +24,9 @@ public class King extends Piece {
         ArrayList<Move> vector = new ArrayList<>();
         Move legalMove;
 
+        //TODO: could this be done in one loop that checked all adjacent squares? Perhaps a method that returns adjacents would be good.
+
+
 //        if(getBoard().outOfRange(x,y+1)
 //                || getBoard().outOfRange(x+1,y)
 //                || getBoard().outOfRange(x-1,y)
@@ -46,11 +49,29 @@ public class King extends Piece {
             vector.add(legalMove);
         }
 
+        if(!getBoard().outOfRange(x,y-1)){
+            if(getBoard().occupied(x,y-1) && (getBoard().getPiece(x,y-1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x, y-1, true);
+            }else{
+                legalMove = new Move(this, x, y, x, y-1, false);
+            }
+            vector.add(legalMove);
+        }
+
         if(!getBoard().outOfRange(x+1,y)){
             if(getBoard().occupied(x+1,y) && (getBoard().getPiece(x+1,y).getColour() != this.getColour())){
                 legalMove = new Move(this, x, y, x+1, y, true);
             }else{
                 legalMove = new Move(this, x, y, x+1, y, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x-1,y)){
+            if(getBoard().occupied(x-1,y) && (getBoard().getPiece(x-1,y).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x-1, y, true);
+            }else{
+                legalMove = new Move(this, x, y, x-1, y, false);
             }
             vector.add(legalMove);
         }
@@ -104,15 +125,17 @@ public class King extends Piece {
         ArrayList<Move> vector = new ArrayList<>();
         Move legalMove;
 
-        if(getBoard().outOfRange(x,y+1)
-                || getBoard().outOfRange(x+1,y)
-                || getBoard().outOfRange(x-1,y)
-                || getBoard().outOfRange(x+1,y+1)
-                || getBoard().outOfRange(x-1,y-1)
-                || getBoard().outOfRange(x-1,y+1)
-                || getBoard().outOfRange(x+1,y-1)){
-            return null;
-        }
+//        if(getBoard().outOfRange(x,y+1)
+//                || getBoard().outOfRange(x+1,y)
+//                || getBoard().outOfRange(x-1,y)
+//                || getBoard().outOfRange(x+1,y+1)
+//                || getBoard().outOfRange(x-1,y-1)
+//                || getBoard().outOfRange(x-1,y+1)
+//                || getBoard().outOfRange(x+1,y-1)){
+//            return null;
+//        }
+
+
 
         if(!getBoard().outOfRange(x,y+1)){
             if(getBoard().occupied(x,y+1) && (getBoard().getPiece(x,y+1).getColour() != this.getColour())){
@@ -123,11 +146,29 @@ public class King extends Piece {
             vector.add(legalMove);
         }
 
+        if(!getBoard().outOfRange(x,y-1)){
+            if(getBoard().occupied(x,y-1) && (getBoard().getPiece(x,y-1).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x, y-1, true);
+            }else{
+                legalMove = new Move(this, x, y, x, y-1, false);
+            }
+            vector.add(legalMove);
+        }
+
         if(!getBoard().outOfRange(x+1,y)){
             if(getBoard().occupied(x+1,y) && (getBoard().getPiece(x+1,y).getColour() != this.getColour())){
                 legalMove = new Move(this, x, y, x+1, y, true);
             }else{
                 legalMove = new Move(this, x, y, x+1, y, false);
+            }
+            vector.add(legalMove);
+        }
+
+        if(!getBoard().outOfRange(x-1,y)){
+            if(getBoard().occupied(x-1,y) && (getBoard().getPiece(x-1,y).getColour() != this.getColour())){
+                legalMove = new Move(this, x, y, x-1, y, true);
+            }else{
+                legalMove = new Move(this, x, y, x-1, y, false);
             }
             vector.add(legalMove);
         }

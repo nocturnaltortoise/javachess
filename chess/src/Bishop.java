@@ -18,62 +18,71 @@ public class Bishop extends Piece{
         }
     }
 
-    //gonna need some kind of loop (while?) to check squares on diagonals up to board edges/occupied square
+    //TODO: perhaps refactor so a method returns an array of all the diagonals, and this merely checks them.
     public ArrayList<Move> whiteBishop(){
         int x = getX();
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
         Move legalMove;
 
-        int nextX = x;
-        int nextY = y;
+        int nextX = getX() + 1;
+        int nextY = getY() + 1;
 
-        while(!getBoard().outOfRange(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE){
-            if(getBoard().occupied(nextX, nextY)) {
+        while(!getBoard().outOfRange(nextX, nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE) {
                 legalMove = new Move(this, x, y, nextX, nextY, true);
             }else{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
             vector.add(legalMove);
+            System.out.println(nextX + ":" + nextY);
             nextX++;
             nextY++;
         }
 
-        while(!getBoard().outOfRange(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE){
-            if(getBoard().occupied(nextX, nextY)) {
+        nextX = getX() - 1;
+        nextY = getY() - 1;
+
+        while(!getBoard().outOfRange(nextX, nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE) {
                 legalMove = new Move(this, x, y, nextX, nextY, true);
             }else{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
             vector.add(legalMove);
+            System.out.println(nextX + ":" + nextY);
             nextX--;
             nextY--;
         }
 
-        while(!getBoard().outOfRange(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE){
-            if(getBoard().occupied(nextX, nextY)) {
+        nextX = getX() + 1;
+        nextY = getY() - 1;
+
+        while(!getBoard().outOfRange(nextX, nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE) {
                 legalMove = new Move(this, x, y, nextX, nextY, true);
             }else{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
             vector.add(legalMove);
+            System.out.println(nextX + ":" + nextY);
             nextX++;
             nextY--;
         }
 
-        while(!getBoard().outOfRange(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE){
-            if(getBoard().occupied(nextX, nextY)) {
+        nextX = getX() - 1;
+        nextY = getY() + 1;
+
+        while(!getBoard().outOfRange(nextX, nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE) {
                 legalMove = new Move(this, x, y, nextX, nextY, true);
             }else{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
             vector.add(legalMove);
+            System.out.println(nextX + ":" + nextY);
             nextX--;
             nextY++;
-        }
-
-        if(vector.isEmpty()){
-            return null;
         }
 
         return vector;
@@ -85,11 +94,11 @@ public class Bishop extends Piece{
         ArrayList<Move> vector = new ArrayList<>();
         Move legalMove;
 
-        int nextX = x;
-        int nextY = y;
+        int nextX = getX() + 1;
+        int nextY = getY() + 1;
 
-        while(!getBoard().outOfRange(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK){
-            if(getBoard().occupied(nextX, nextY)) {
+        while(!getBoard().outOfRange(nextX, nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK) {
                 legalMove = new Move(this, x, y, nextX, nextY, true);
             }else{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
@@ -97,10 +106,14 @@ public class Bishop extends Piece{
             vector.add(legalMove);
             nextX++;
             nextY++;
+
         }
 
-        while(!getBoard().outOfRange(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK){
-            if(getBoard().occupied(nextX, nextY)) {
+        nextX = getX() - 1;
+        nextY = getY() - 1;
+
+        while(!getBoard().outOfRange(nextX, nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK) {
                 legalMove = new Move(this, x, y, nextX, nextY, true);
             }else{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
@@ -110,8 +123,11 @@ public class Bishop extends Piece{
             nextY--;
         }
 
-        while(!getBoard().outOfRange(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK){
-            if(getBoard().occupied(nextX, nextY)) {
+        nextX = getX() + 1;
+        nextY = getY() - 1;
+
+        while(!getBoard().outOfRange(nextX, nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK) {
                 legalMove = new Move(this, x, y, nextX, nextY, true);
             }else{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
@@ -119,10 +135,14 @@ public class Bishop extends Piece{
             vector.add(legalMove);
             nextX++;
             nextY--;
+
         }
 
-        while(!getBoard().outOfRange(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK){
-            if(getBoard().occupied(nextX, nextY)) {
+        nextX = getX() - 1;
+        nextY = getY() + 1;
+
+        while(!getBoard().outOfRange(nextX, nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK) {
                 legalMove = new Move(this, x, y, nextX, nextY, true);
             }else{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
@@ -130,10 +150,6 @@ public class Bishop extends Piece{
             vector.add(legalMove);
             nextX--;
             nextY++;
-        }
-
-        if(vector.isEmpty()){
-            return null;
         }
 
         return vector;

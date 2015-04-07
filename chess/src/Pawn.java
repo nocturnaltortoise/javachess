@@ -20,8 +20,6 @@ import java.util.*;
 
 public class Pawn extends Piece {
 
-    private boolean firstMove = true;
-
     public Pawn (int ix, int iy, int c, Board b) {
         super(PieceCode.PAWN, ix, iy, c, b);
     }
@@ -46,23 +44,19 @@ public class Pawn extends Piece {
         if (getBoard().outOfRange(x,y+1)) return v;
 
         // set up m to refer to a Move object
-        Move m = null;
+        Move m;
 
-//        if (firstMove) {
-//            if(!getBoard().occupied(x,y+2)){
-//                m = new Move(this, x, y, x, y+2, false);
-//                v.add(m);
-//                firstMove = false;
-//            }
-//        }
+        if (y == 1) {
+            if(!getBoard().occupied(x,y+2) && !getBoard().occupied(x,y+1)){
+                m = new Move(this, x, y, x, y+2, false);
+                v.add(m);
+            }
+        }
 
         // first legal move is to go from x,y to x,y+1 if x,y+1 is unoccupied
         if (!getBoard().occupied(x,y+1)) {
             m = new Move(this, x,y,x,y+1,false);
             v.add(m);
-            if(firstMove){
-                firstMove = false;
-            }
         }
 
         // second legal move is to go from x,y to x+1,y+1 if x+1,y+1 is occupied
@@ -73,9 +67,6 @@ public class Pawn extends Piece {
                 !=this.getColour())) {
             m = new Move(this, x,getY(),x+1,y+1,true);
             v.add(m);
-            if(firstMove){
-                firstMove = false;
-            }
         }
 
         // third legal move is to go from x,y to x-1,y+1 if x-1,y+1 is occupied
@@ -86,12 +77,9 @@ public class Pawn extends Piece {
                 !=this.getColour())) {
             m = new Move(this, x,y,x-1,y+1,true);
             v.add(m);
-            if(firstMove){
-                firstMove = false;
-            }
         }
 
-        if (v.isEmpty()) return null;
+       // if (v.isEmpty()) return null;
         return v;
     }
 
@@ -107,26 +95,22 @@ public class Pawn extends Piece {
         if (getBoard().outOfRange(x,y-1)) return v;
 
         // set up m to refer to a Move object
-        Move m = null;
+        Move m;
 
-//        if (firstMove) {
-//            if(!getBoard().occupied(x,y+2)){
-//                m = new Move(this, x, y, x, y+2, false);
-//                v.add(m);
-//                firstMove = false;
-//            }
-//        }
-
-        // first legal move is to go from x,y to x,y+1 if x,y+1 is unoccupied
-        if (!getBoard().occupied(x,y-1)) {
-            m = new Move(this, x,y,x,y-1,false);
-            v.add(m);
-            if(firstMove){
-                firstMove = false;
+        if (y == 6) {
+            if(!getBoard().occupied(x,y-2) && !getBoard().occupied(x,y-1)){
+                m = new Move(this, x, y, x, y-2, false);
+                v.add(m);
             }
         }
 
-        // second legal move is to go from x,y to x+1,y+1 if x+1,y+1 is occupied
+        // first legal move is to go from x,y to x,y-1 if x,y-1 is unoccupied
+        if (!getBoard().occupied(x,y-1)) {
+            m = new Move(this, x,y,x,y-1,false);
+            v.add(m);
+        }
+
+        // second legal move is to go from x,y to x+1,y-1 if x+1,y-1 is occupied
         // by a white piece
         if (!getBoard().outOfRange(x+1, y-1)
                 && getBoard().occupied(x+1, y-1)
@@ -134,12 +118,9 @@ public class Pawn extends Piece {
                 !=this.getColour())) {
             m = new Move(this, x,y,x+1,y-1,true);
             v.add(m);
-            if(firstMove){
-                firstMove = false;
-            }
         }
 
-        // third legal move is to go from x,y to x-1,y+1 if x-1,y+1 is occupied
+        // third legal move is to go from x,y to x-1,y-1 if x-1,y-1 is occupied
         // by a white piece
         if (!getBoard().outOfRange(x-1, y-1)
                 && getBoard().occupied(x-1, y-1)
@@ -147,12 +128,9 @@ public class Pawn extends Piece {
                 !=this.getColour())) {
             m = new Move(this, x,y,x-1,y-1,true);
             v.add(m);
-            if(firstMove){
-                firstMove = false;
-            }
         }
 
-        if (v.isEmpty()) return null;
+     //   if (v.isEmpty()) return null;
         return v;
     }
 

@@ -8,47 +8,62 @@ public class HumanPlayer extends Player{
     private static Scanner moveInput = new Scanner(System.in);
 
     public HumanPlayer(String n, Pieces p, Board b, Player o){
-        super(n,p,b,o);
+        super(n, p, b, o);
     }
 
     @Override
     public boolean makeMove(){
-        //returns true when move takes the king.
-        String[][] move = getMove();
+        boolean legalMove = false;
+        boolean kingTaken = false;
 
-        int initX = letterToNumber(move[0][0]);
-        int initY = Integer.parseInt(move[0][1]);
-        int newX = letterToNumber(move[1][0]);
-        int newY = Integer.parseInt(move[1][1]);
-        boolean targetOccupied = getBoard().occupied(newX, newY);
+        while(!legalMove){
+            //returns true when move takes the king.
+            String[][] move = getMove();
 
-        System.out.println("" + initX + "," + initY + "," + newX +"," + newY + "," + targetOccupied);
-        System.out.println(getBoard().getPiece(initX,initY));
-
-        Piece movingPiece = getBoard().getPiece(initX, initY);
-        Move playerMove = new Move(movingPiece, initX, initY, newX, newY, targetOccupied);
-
-        System.out.println(movingPiece.getClass() + playerMove.toString());
-
-        System.out.println(movingPiece.availableMoves());
-
-        if(movingPiece.availableMoves().contains(playerMove)){
-            if(targetOccupied && getBoard().getPiece(newX, newY).getColour() != getBoard().getPiece(initX, initY).getColour()){
-                getBoard().remove(newX, newY);
-                if(PieceCode.charToInt(getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING){
-                    return true;
-                }else{
-                    return false;
-                }
+            if(letterToNumber(move[0][0]) > 7
+                    || letterToNumber(move[0][0]) < 0
+                    || letterToNumber(move[1][0]) > 7
+                    || letterToNumber(move[1][0]) < 0) {
+                System.out.println("Enter a valid move.");
+                legalMove = false;
+                continue;
             }
-            getBoard().getData()[newX][newY] = movingPiece;
-//            movingPiece.getBoard().getPiece(initX, initY).setPosition(newX, newY);
-            System.out.println(getBoard().getPiece(newX, newY));
-            getBoard().remove(initX, initY);
-        }else{
-            System.out.println("Move is not legal. Enter a legal move.");
+
+            int initX = letterToNumber(move[0][0]);
+            int initY = Integer.parseInt(move[0][1]);
+            int newX = letterToNumber(move[1][0]);
+            int newY = Integer.parseInt(move[1][1]);
+            boolean targetOccupied = getBoard().occupied(newX, newY);
+            if(targetOccupied){
+                kingTaken = PieceCode.charToInt(getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING;
+            }
+//            System.out.println("" + initX + "," + initY + "," + newX +"," + newY + "," + targetOccupied);
+//            System.out.println(getBoard().getPiece(initX,initY));
+
+            Piece movingPiece = getBoard().getPiece(initX, initY);
+            Move playerMove = new Move(movingPiece, initX, initY, newX, newY, targetOccupied);
+
+            System.out.println(movingPiece.getClass() + playerMove.toString());
+            System.out.println(movingPiece.availableMoves());
+
+            if(movingPiece.availableMoves().contains(playerMove) && movingPiece.getColour() == this.getPieces().getColour()){
+                if(targetOccupied && getBoard().getPiece(newX, newY).getColour() != getBoard().getPiece(initX, initY).getColour()){
+                    getBoard().remove(newX, newY);
+                }
+                getBoard().getData()[newX][newY] = movingPiece;
+                movingPiece.setPosition(newX, newY);
+                System.out.println(getBoard().getPiece(initX, initY));
+
+                getBoard().remove(initX, initY);
+                legalMove = true;
+            }else{
+                System.out.println("Move is not legal. Enter a legal move.");
+                legalMove = false;
+            }
+
         }
-        return false;
+
+        return kingTaken;
 
     }
 
@@ -80,8 +95,9 @@ public class HumanPlayer extends Player{
             case "h":
                 return 7;
             default:
-                return 10;
-                //only way this would happen would be if the letter isn't a grid ref - should error check for this
+                return 100;
+                //only way this would happen would be if the letter isn't a grid ref
+                //could be anything over 7
 
         }
     }

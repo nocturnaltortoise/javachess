@@ -41,30 +41,30 @@ public class Pieces {
     data = new ArrayList<Piece>();
     
     // add 8 pawns
-    for (int i=0; i<8; i++) {
-      if (c==Player.WHITE) j=1; else j=6;
-      p = new Pawn(i,j,c,board); 
-      data.add(p);
-      b.setPosition(i,j,p);
-    }
+//    for (int i=0; i<8; i++) {
+//      if (c==Player.WHITE) j=1; else j=6;
+//      p = new Pawn(i,j,c,board);
+//      data.add(p);
+//      b.setPosition(i,j,p);
+//    }
 
     // add 2 knights
-    if (c==Player.WHITE) { 
-      p = new Knight(1,0,c,board);
-      data.add(p);
-      b.setPosition(1,0, p);
-      p = new Knight(6,0,c,board);
-      data.add(p);
-      b.setPosition(6,0, p);
-    }
-    else {
-      p = new Knight(1,7,c,board);
-      data.add(p);
-      b.setPosition(1,7, p);
-      p = new Knight(6,7,c,board);
-      data.add(p);
-      b.setPosition(6,7, p);
-    }
+//    if (c==Player.WHITE) {
+//      p = new Knight(1,0,c,board);
+//      data.add(p);
+//      b.setPosition(1,0, p);
+//      p = new Knight(6,0,c,board);
+//      data.add(p);
+//      b.setPosition(6,0, p);
+//    }
+//    else {
+//      p = new Knight(1,7,c,board);
+//      data.add(p);
+//      b.setPosition(1,7, p);
+//      p = new Knight(6,7,c,board);
+//      data.add(p);
+//      b.setPosition(6,7, p);
+//    }
 
     // add 2 bishops
     if (c==Player.WHITE) { 
@@ -85,48 +85,53 @@ public class Pieces {
     }
 
     // add 2 rooks
-    if (c==Player.WHITE) { 
-      p = new Rook(0,0,c,board);
-      data.add(p);
-      b.setPosition(0,0, p);
-      p = new Rook(7,0,c,board);
-      data.add(p);
-      b.setPosition(7,0, p);
-    }
-    else {
-      p = new Rook(0,7,c,board);
-      data.add(p);
-      b.setPosition(0,7, p);
-      p = new Rook(7,7,c,board);
-      data.add(p);
-      b.setPosition(7,7, p);
-    }
+//    if (c==Player.WHITE) {
+//      p = new Rook(0,0,c,board);
+//      data.add(p);
+//      b.setPosition(0,0, p);
+//      p = new Rook(7,0,c,board);
+//      data.add(p);
+//      b.setPosition(7,0, p);
+//    }
+//    else {
+//      p = new Rook(0,7,c,board);
+//      data.add(p);
+//      b.setPosition(0,7, p);
+//      p = new Rook(7,7,c,board);
+//      data.add(p);
+//      b.setPosition(7,7, p);
+//    }
 
-    // add 1 queen
-    if (c==Player.WHITE) { 
-      p = new Queen(3,0,c,board);
-      data.add(p);
-      b.setPosition(3,0, p);
-    }
-    else {
-      p = new Queen(3,7,c,board);
-      data.add(p);
-      b.setPosition(3,7, p);
-    }
+//     add 1 queen
+//    if (c==Player.WHITE) {
+//      p = new Queen(3,0,c,board);
+//      data.add(p);
+//      b.setPosition(3,0, p);
+//    }
+//    else {
+//      p = new Queen(3,7,c,board);
+//      data.add(p);
+//      b.setPosition(3,7, p);
+//    }
 
     // and finally 1 King
-    if (c==Player.WHITE) { 
-      p = new King(4,0,c,board);
-      data.add(p);
-      b.setPosition(4,0, p);
-    }
-    else {
-      p = new King(4,7,c,board);
-      data.add(p);
-      b.setPosition(4,7, p);
-    }
+//    if (c==Player.WHITE) {
+//      p = new King(4,0,c,board);
+//      data.add(p);
+//      b.setPosition(4,0, p);
+//    }
+//    else {
+//      p = new King(4,7,c,board);
+//      data.add(p);
+//      b.setPosition(4,7, p);
+//    }
 
     numData=10;
+  }
+
+  //added a getColour method to return the colour of this set of pieces.
+  public int getColour(){
+    return colour;
   }
 
   public int getNumPieces() {
