@@ -12,14 +12,38 @@ public class Knight extends Piece {
 
     @Override
     public ArrayList<Move> availableMoves(){
-        return null;
+        return knight();
     }
 
-    public ArrayList<Move> whiteKnight(){
-        return null;
+    public ArrayList<Move> knight(){
+        int x = getX();
+        int y = getY();
+        ArrayList<Move> vector = new ArrayList<>();
+
+        checkSquares(x,y,getX()-1,getY()+2,vector);
+        checkSquares(x,y,getX()+1,getY()+2,vector);
+        checkSquares(x,y,getX()+1,getY()-2,vector);
+        checkSquares(x,y,getX()-1,getY()-2,vector);
+        checkSquares(x,y,getX()+2,getY()+1,vector);
+        checkSquares(x,y,getX()+2,getY()-1,vector);
+        checkSquares(x,y,getX()-2,getY()+1,vector);
+        checkSquares(x,y,getX()-2,getY()-1,vector);
+
+        return vector;
     }
 
-    public ArrayList<Move> blackKnight(){
-        return null;
+    private void checkSquares(int x, int y, int nextX, int nextY, ArrayList<Move> vector){
+        Move legalMove = null;
+        if(!getBoard().outOfRange(nextX,nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
+                legalMove = new Move(this, x, y, nextX, nextY, true);
+            }
+
+            if(!getBoard().occupied(nextX, nextY)){
+                legalMove = new Move(this, x, y, nextX, nextY, false);
+            }
+
+            vector.add(legalMove);
+        }
     }
 }

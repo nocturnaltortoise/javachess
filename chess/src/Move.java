@@ -19,30 +19,8 @@ public class Move {
         isOccupied = occupied;
     }
 
-    //not sure whether I need setters for this class - add them later as you need them
-
     public Piece getPiece() {
         return piece;
-    }
-
-    public int getCurrentXPosition() {
-        return currentXPosition;
-    }
-
-    public int getCurrentYPosition() {
-        return currentYPosition;
-    }
-
-    public int getNewXPosition() {
-        return newXPosition;
-    }
-
-    public int getNewYPosition() {
-        return newYPosition;
-    }
-
-    public boolean isOccupied() {
-        return isOccupied;
     }
 
     public String toString(){
@@ -65,7 +43,6 @@ public class Move {
         if (newYPosition != move.newYPosition) return false;
         if (isOccupied != move.isOccupied) return false;
         return piece == move.piece;
-
     }
 
     @Override

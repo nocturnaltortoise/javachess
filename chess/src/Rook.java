@@ -11,128 +11,92 @@ public class Rook extends Piece {
 
     @Override
     public ArrayList<Move> availableMoves(){
-        if(getColour() == PieceCode.WHITE){
-            return whiteRook();
-        }else{
-            return blackRook();
-        }
+        return rook();
     }
 
-    public ArrayList<Move> whiteRook(){
+    //the rook's legal moves account for half the queen's legal moves (the rank and file).
+    public ArrayList<Move> rook(){
         int x = getX();
         int y = getY();
-        Move legalMove;
+        Move legalMove = null;
         ArrayList<Move> vector = new ArrayList<>();
 
-        int nextX = getX() + 1;
+        int nextX = getX()+1;
         int nextY = getY();
 
         while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE) {
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
                 legalMove = new Move(this, x, y, nextX, nextY, true);
-            }else{
+            }
+
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
+                break;
+            }
+
+            if(!getBoard().occupied(nextX, nextY)){
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
+
             vector.add(legalMove);
             nextX++;
         }
 
         nextX = getX();
-        nextY = getY() + 1;
+        nextY = getY()+1;
 
         while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE) {
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
                 legalMove = new Move(this, x, y, nextX, nextY, true);
-            }else{
+            }
+
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
+                break;
+            }
+
+            if(!getBoard().occupied(nextX, nextY)){
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
+
             vector.add(legalMove);
             nextY++;
         }
 
-        nextX = getX() - 1;
+        nextX = getX()-1;
         nextY = getY();
 
         while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE) {
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
                 legalMove = new Move(this, x, y, nextX, nextY, true);
-            }else{
+            }
+
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
+                break;
+            }
+
+            if(!getBoard().occupied(nextX, nextY)){
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
+
             vector.add(legalMove);
             nextX--;
         }
 
         nextX = getX();
-        nextY = getY() - 1;
+        nextY = getY()-1;
 
         while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.WHITE) {
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
                 legalMove = new Move(this, x, y, nextX, nextY, true);
-            }else{
+            }
+
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
+                break;
+            }
+
+            if(!getBoard().occupied(nextX, nextY)){
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
-            vector.add(legalMove);
-            nextY--;
-        }
 
-        return vector;
-    }
-
-    public ArrayList<Move> blackRook(){
-        int x = getX();
-        int y = getY();
-        Move legalMove;
-        ArrayList<Move> vector = new ArrayList<>();
-
-        int nextX = getX() + 1;
-        int nextY = getY();
-
-        while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK){
-                legalMove = new Move(this, x, y, nextX, nextY, true);
-            }else{
-                legalMove = new Move(this, x, y, nextX, nextY, false);
-            }
-            vector.add(legalMove);
-            nextX++;
-        }
-
-        nextX = getX();
-        nextY = getY() + 1;
-
-        while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK){
-                legalMove = new Move(this, x, y, nextX, nextY, true);
-            }else{
-                legalMove = new Move(this, x, y, nextX, nextY, false);
-            }
-            vector.add(legalMove);
-            nextY++;
-        }
-
-        nextX = getX() - 1;
-        nextY = getY();
-
-        while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK) {
-                legalMove = new Move(this, x, y, nextX, nextY, true);
-            }else{
-                legalMove = new Move(this, x, y, nextX, nextY, false);
-            }
-            vector.add(legalMove);
-            nextX--;
-        }
-
-        nextX = getX();
-        nextY = getY() - 1;
-
-        while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != PieceCode.BLACK) {
-                legalMove = new Move(this, x, y, nextX, nextY, true);
-            }else{
-                legalMove = new Move(this, x, y, nextX, nextY, false);
-            }
             vector.add(legalMove);
             nextY--;
         }

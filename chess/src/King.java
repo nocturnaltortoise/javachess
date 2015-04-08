@@ -11,209 +11,38 @@ public class King extends Piece {
 
     @Override
     public ArrayList<Move> availableMoves(){
-        if(getColour() == PieceCode.WHITE){
-            return whiteKing();
-        }else{
-            return blackKing();
-        }
+        return king();
     }
 
-    public ArrayList<Move> whiteKing(){
+    public ArrayList<Move> king(){
         int x = getX();
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
-        Move legalMove;
 
-        //TODO: could this be done in one loop that checked all adjacent squares? Perhaps a method that returns adjacents would be good.
-
-
-//        if(getBoard().outOfRange(x,y+1)
-//                || getBoard().outOfRange(x+1,y)
-//                || getBoard().outOfRange(x-1,y)
-//                || getBoard().outOfRange(x+1,y+1)
-//                || getBoard().outOfRange(x-1,y-1)
-//                || getBoard().outOfRange(x-1,y+1)
-//                || getBoard().outOfRange(x+1,y-1)){
-//            return vector;
-//        }
-        //if you're returning an empty arraylist when there are no moves possible, there's no point to this I think?
-        // Also it causes problems in it's current state - would need to check whether the move takes the King off the board,
-        //not if *any* possible move takes it off the board.
-
-        if(!getBoard().outOfRange(x,y+1)){
-            if(getBoard().occupied(x,y+1) && (getBoard().getPiece(x,y+1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x, y+1, true);
-            }else{
-                legalMove = new Move(this, x, y, x, y+1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x,y-1)){
-            if(getBoard().occupied(x,y-1) && (getBoard().getPiece(x,y-1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x, y-1, true);
-            }else{
-                legalMove = new Move(this, x, y, x, y-1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x+1,y)){
-            if(getBoard().occupied(x+1,y) && (getBoard().getPiece(x+1,y).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x+1, y, true);
-            }else{
-                legalMove = new Move(this, x, y, x+1, y, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x-1,y)){
-            if(getBoard().occupied(x-1,y) && (getBoard().getPiece(x-1,y).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x-1, y, true);
-            }else{
-                legalMove = new Move(this, x, y, x-1, y, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x+1,y+1)){
-            if(getBoard().occupied(x+1,y+1) && (getBoard().getPiece(x+1,y+1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x+1, y+1, true);
-            }else{
-                legalMove = new Move(this, x, y, x+1, y+1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x-1,y+1)){
-            if(getBoard().occupied(x-1,y+1) && (getBoard().getPiece(x-1,y+1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x-1, y+1, true);
-            }else{
-                legalMove = new Move(this, x, y, x-1, y+1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x+1,y-1)){
-            if(getBoard().occupied(x+1,y-1) && (getBoard().getPiece(x+1,y-1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x+1, y-1, true);
-            }else{
-                legalMove = new Move(this, x, y, x+1, y-1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x-1,y-1)){
-            if(getBoard().occupied(x-1,y-1) && (getBoard().getPiece(x-1,y-1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x-1, y-1, true);
-            }else{
-                legalMove = new Move(this, x, y, x-1, y-1, false);
-            }
-            vector.add(legalMove);
-        }
-
-//        if(vector.isEmpty()){
-//            return null;
-//        }
+        checkSquares(x,y,getX(),getY()+1,vector);
+        checkSquares(x,y,getX(),getY()-1,vector);
+        checkSquares(x,y,getX()+1,getY(),vector);
+        checkSquares(x,y,getX()+1,getY()+1,vector);
+        checkSquares(x,y,getX()+1,getY()-1,vector);
+        checkSquares(x,y,getX()-1,getY()-1,vector);
+        checkSquares(x,y,getX()-1,getY()+1,vector);
+        checkSquares(x,y,getX()-1,getY(),vector);
 
         return vector;
     }
 
-    public ArrayList<Move> blackKing(){
-        int x = getX();
-        int y = getY();
-        ArrayList<Move> vector = new ArrayList<>();
-        Move legalMove;
-
-//        if(getBoard().outOfRange(x,y+1)
-//                || getBoard().outOfRange(x+1,y)
-//                || getBoard().outOfRange(x-1,y)
-//                || getBoard().outOfRange(x+1,y+1)
-//                || getBoard().outOfRange(x-1,y-1)
-//                || getBoard().outOfRange(x-1,y+1)
-//                || getBoard().outOfRange(x+1,y-1)){
-//            return null;
-//        }
-
-
-
-        if(!getBoard().outOfRange(x,y+1)){
-            if(getBoard().occupied(x,y+1) && (getBoard().getPiece(x,y+1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x, y+1, true);
-            }else{
-                legalMove = new Move(this, x, y, x, y+1, false);
+    private void checkSquares(int x, int y, int nextX, int nextY, ArrayList<Move> vector){
+        Move legalMove = null;
+        if(!getBoard().outOfRange(nextX,nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
+                legalMove = new Move(this, x, y, nextX, nextY, true);
             }
+
+            if(!getBoard().occupied(nextX, nextY)){
+                legalMove = new Move(this, x, y, nextX, nextY, false);
+            }
+
             vector.add(legalMove);
         }
-
-        if(!getBoard().outOfRange(x,y-1)){
-            if(getBoard().occupied(x,y-1) && (getBoard().getPiece(x,y-1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x, y-1, true);
-            }else{
-                legalMove = new Move(this, x, y, x, y-1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x+1,y)){
-            if(getBoard().occupied(x+1,y) && (getBoard().getPiece(x+1,y).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x+1, y, true);
-            }else{
-                legalMove = new Move(this, x, y, x+1, y, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x-1,y)){
-            if(getBoard().occupied(x-1,y) && (getBoard().getPiece(x-1,y).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x-1, y, true);
-            }else{
-                legalMove = new Move(this, x, y, x-1, y, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x+1,y+1)){
-            if(getBoard().occupied(x+1,y+1) && (getBoard().getPiece(x+1,y+1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x+1, y+1, true);
-            }else{
-                legalMove = new Move(this, x, y, x+1, y+1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x-1,y+1)){
-            if(getBoard().occupied(x-1,y+1) && (getBoard().getPiece(x-1,y+1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x-1, y+1, true);
-            }else{
-                legalMove = new Move(this, x, y, x-1, y+1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x+1,y-1)){
-            if(getBoard().occupied(x+1,y-1) && (getBoard().getPiece(x+1,y-1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x+1, y-1, true);
-            }else{
-                legalMove = new Move(this, x, y, x+1, y-1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(!getBoard().outOfRange(x-1,y-1)){
-            if(getBoard().occupied(x-1,y-1) && (getBoard().getPiece(x-1,y-1).getColour() != this.getColour())){
-                legalMove = new Move(this, x, y, x-1, y-1, true);
-            }else{
-                legalMove = new Move(this, x, y, x-1, y-1, false);
-            }
-            vector.add(legalMove);
-        }
-
-        if(vector.isEmpty()){
-            return null;
-        }
-
-        return vector;
     }
-
 }
