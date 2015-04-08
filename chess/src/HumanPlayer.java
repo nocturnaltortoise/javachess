@@ -48,7 +48,7 @@ public class HumanPlayer extends Player{
 
             if(movingPiece.availableMoves().contains(playerMove) && movingPiece.getColour() == this.getPieces().getColour()){
                 if(targetOccupied && getBoard().getPiece(newX, newY).getColour() != getBoard().getPiece(initX, initY).getColour()){
-                    getBoard().remove(newX, newY);
+                    getPieces().delete(getBoard().getPiece(newX, newY));
                 }
                 getBoard().getData()[newX][newY] = movingPiece;
                 movingPiece.setPosition(newX, newY);

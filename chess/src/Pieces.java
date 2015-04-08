@@ -67,40 +67,40 @@ public class Pieces {
 //    }
 
     // add 2 bishops
-    if (c==Player.WHITE) { 
-      p = new Bishop(2,0,c,board);
-      data.add(p);
-      b.setPosition(2,0, p);
-      p = new Bishop(5,0,c,board);
-      data.add(p);
-      b.setPosition(5,0, p);
-    }
-    else {
-      p = new Bishop(2,7,c,board);
-      data.add(p);
-      b.setPosition(2,7, p);
-      p = new Bishop(5,7,c,board);
-      data.add(p);
-      b.setPosition(5,7, p);
-    }
-
-    // add 2 rooks
 //    if (c==Player.WHITE) {
-//      p = new Rook(0,0,c,board);
+//      p = new Bishop(2,0,c,board);
 //      data.add(p);
-//      b.setPosition(0,0, p);
-//      p = new Rook(7,0,c,board);
+//      b.setPosition(2,0, p);
+//      p = new Bishop(5,0,c,board);
 //      data.add(p);
-//      b.setPosition(7,0, p);
+//      b.setPosition(5,0, p);
 //    }
 //    else {
-//      p = new Rook(0,7,c,board);
+//      p = new Bishop(2,7,c,board);
 //      data.add(p);
-//      b.setPosition(0,7, p);
-//      p = new Rook(7,7,c,board);
+//      b.setPosition(2,7, p);
+//      p = new Bishop(5,7,c,board);
 //      data.add(p);
-//      b.setPosition(7,7, p);
+//      b.setPosition(5,7, p);
 //    }
+
+    // add 2 rooks
+    if (c==Player.WHITE) {
+      p = new Rook(0,0,c,board);
+      data.add(p);
+      b.setPosition(0,0, p);
+      p = new Rook(7,0,c,board);
+      data.add(p);
+      b.setPosition(7,0, p);
+    }
+    else {
+      p = new Rook(0,7,c,board);
+      data.add(p);
+      b.setPosition(0,7, p);
+      p = new Rook(7,7,c,board);
+      data.add(p);
+      b.setPosition(7,7, p);
+    }
 
 //     add 1 queen
 //    if (c==Player.WHITE) {

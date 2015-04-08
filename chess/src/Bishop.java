@@ -50,7 +50,6 @@ public class Bishop extends Piece{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
             vector.add(legalMove);
-            System.out.println(nextX + ":" + nextY);
             nextX--;
             nextY--;
         }
@@ -65,7 +64,6 @@ public class Bishop extends Piece{
                 legalMove = new Move(this, x, y, nextX, nextY, false);
             }
             vector.add(legalMove);
-            System.out.println(nextX + ":" + nextY);
             nextX++;
             nextY--;
         }
