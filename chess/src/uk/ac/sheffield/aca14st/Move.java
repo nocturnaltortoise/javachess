@@ -1,5 +1,7 @@
 package uk.ac.sheffield.aca14st;
 
+/**@author Simon Turner (aca14st) */
+
 public class Move {
 
     private Piece piece;

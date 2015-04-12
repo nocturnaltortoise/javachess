@@ -2,6 +2,8 @@ package uk.ac.sheffield.aca14st;
 
 import java.util.Scanner;
 
+/**@author Simon Turner (aca14st) */
+
 /*
  * Main Class for Chess
  * Runs the main parts of the program and does the setup for the Chess program.

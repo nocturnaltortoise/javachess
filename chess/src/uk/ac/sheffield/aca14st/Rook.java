@@ -2,6 +2,8 @@ package uk.ac.sheffield.aca14st;
 
 import java.util.ArrayList;
 
+/**@author Simon Turner (aca14st) */
+
 public class Rook extends Piece {
 
     public Rook(int x, int y, int colour, Board board){

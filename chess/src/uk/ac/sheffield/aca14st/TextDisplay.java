@@ -1,5 +1,7 @@
 package uk.ac.sheffield.aca14st;
 
+/**@author Simon Turner (aca14st) */
+
 public class TextDisplay implements Display {
 
 	//Method to print out the board's contents, given an array of pieces.

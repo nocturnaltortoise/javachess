@@ -2,6 +2,8 @@ package uk.ac.sheffield.aca14st;
 
 import java.util.Scanner;
 
+/**@author Simon Turner (aca14st) */
+
 public class HumanPlayer extends Player{
 
     private static Scanner moveInput = new Scanner(System.in);

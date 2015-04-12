@@ -2,6 +2,8 @@ package uk.ac.sheffield.aca14st;
 
 import java.util.ArrayList;
 
+/**@author Simon Turner (aca14st) */
+
 public class Bishop extends Piece{
 
     public Bishop(int x, int y, int colour, Board board){
