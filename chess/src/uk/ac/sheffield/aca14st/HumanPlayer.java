@@ -1,3 +1,5 @@
+package uk.ac.sheffield.aca14st;
+
 import java.util.Scanner;
 
 public class HumanPlayer extends Player{
@@ -8,7 +10,7 @@ public class HumanPlayer extends Player{
         super(n, p, b, o);
     }
 
-    //returns true when move takes the king.
+    //Makes a move inputted by the player. Returns true when the player takes the king.
     @Override
     public boolean makeMove(){
         boolean legalMove = false;
@@ -19,6 +21,7 @@ public class HumanPlayer extends Player{
 
             String[][] move = getMove();
 
+            //check that the inputted coordinates are valid.
             if(letterToNumber(move[0][0]) > 7
                     || letterToNumber(move[0][0]) < 0
                     || letterToNumber(move[1][0]) > 7
@@ -28,10 +31,12 @@ public class HumanPlayer extends Player{
                 continue;
             }
 
+            //Setup all the move coordinates as individual integers.
             int initX = letterToNumber(move[0][0]);
             int initY = Integer.parseInt(move[0][1]);
             int newX = letterToNumber(move[1][0]);
             int newY = Integer.parseInt(move[1][1]);
+            //check whether the target square is occupied.
             boolean targetOccupied = getBoard().occupied(newX, newY);
 
             //if taking a piece, check whether the piece is a king.
@@ -42,9 +47,18 @@ public class HumanPlayer extends Player{
             Piece movingPiece = getBoard().getPiece(initX, initY);
             Move playerMove = new Move(movingPiece, initX, initY, newX, newY, targetOccupied);
 
-            //if the moving piece has the suggested move in it's legal moves, and belongs to the player moving it, move the piece.
-            //If there's an opposite colour piece under the target, take that piece. If the move isn't legal, prompt the user to enter
-            //another move.
+            //Make sure that there is a piece on the square the player has inputted.
+            if(movingPiece == null){
+                System.out.println("Enter a valid move.");
+                legalMove = false;
+                continue;
+            }
+
+            /*
+             *If the moving piece has the suggested move in it's legal moves, and belongs to the player moving it, move the piece.
+             *If there's an opposite colour piece under the target, take that piece. If the move isn't legal, prompt the user to enter
+             *another move.
+             */
             if(movingPiece.availableMoves().contains(playerMove) && movingPiece.getColour() == this.getPieces().getColour()){
                 if(targetOccupied && getBoard().getPiece(newX, newY).getColour() != getBoard().getPiece(initX, initY).getColour()){
                     getBoard().remove(newX, newY);
@@ -62,6 +76,7 @@ public class HumanPlayer extends Player{
         return kingTaken;
     }
 
+    //Gets the user's input for a move and makes it usable by makeMove.
     private String[][] getMove(){
         System.out.println("Enter a move in the form (grid-ref of piece, grid-ref of target) e.g. (a3,a4).");
         String input = moveInput.next();

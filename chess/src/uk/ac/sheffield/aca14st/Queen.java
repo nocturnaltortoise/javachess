@@ -1,9 +1,12 @@
+package uk.ac.sheffield.aca14st;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Queen extends Piece {
 
     public Queen(int x, int y, int colour, Board b){
+        //Calls the uk.ac.sheffield.aca14st.Piece constructor with the char symbol for the queen
+        //as well as the other details fed into the uk.ac.sheffield.aca14st.Queen's constructor.
         super(PieceCode.QUEEN, x, y, colour, b);
     }
 
@@ -18,6 +21,7 @@ public class Queen extends Piece {
         Move legalMove = null;
         ArrayList<Move> vector = new ArrayList<>();
 
+        //The queen's moves are the moves of the uk.ac.sheffield.aca14st.Rook and the uk.ac.sheffield.aca14st.Bishop. These loops are identical to those.
         int nextX = getX()+1;
         int nextY = getY();
 

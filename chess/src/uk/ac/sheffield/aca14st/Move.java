@@ -1,6 +1,5 @@
-/**
- * Created by simon on 31/03/15.
- */
+package uk.ac.sheffield.aca14st;
+
 public class Move {
 
     private Piece piece;
@@ -10,6 +9,7 @@ public class Move {
     private int newYPosition;
     private boolean isOccupied;
 
+    //Each move consists of a moving piece, it's original position, new position, and whether the new position is occupied.
     public Move(Piece p, int currentX, int currentY, int newX, int newY, boolean occupied){
         piece = p;
         currentXPosition = currentX;
@@ -19,17 +19,20 @@ public class Move {
         isOccupied = occupied;
     }
 
+    //Returns the moving piece.
     public Piece getPiece() {
         return piece;
     }
 
+    //Returns some basic info about a move - mostly useful for debugging.
     public String toString(){
-        return "Piece: " + piece.toString()
+        return "uk.ac.sheffield.aca14st.Piece: " + piece.toString()
                 + " Moving from: " + currentXPosition + ", " + currentYPosition
                 + " To: " + newXPosition + ", " + newYPosition
                 + " Target Occupied? " + isOccupied;
     }
 
+    //Checks whether one move is equal to another.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

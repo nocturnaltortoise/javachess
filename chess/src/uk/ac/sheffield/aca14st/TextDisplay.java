@@ -1,12 +1,12 @@
-/**
- * Created by simon on 08/04/15.
- */
+package uk.ac.sheffield.aca14st;
+
 public class TextDisplay implements Display {
 
+	//Method to print out the board's contents, given an array of pieces.
 	@Override
 	public void showPiecesOnBoard(Piece[][] piecesOnBoard){
 		System.out.println();
-		int i = 0;
+		int i;
 		int j = 1;
 
 		int gridRef = 0;
@@ -17,10 +17,11 @@ public class TextDisplay implements Display {
 			System.out.print(gridRef);
 			gridRef++;
 			for(j = 0; j < piecesOnBoard.length; j++){
-
+				//If a square has nothing in it, it's null, so we print a dash.
 				if(piecesOnBoard[j][i] == null){
 					System.out.print("-");
 				}else{
+					//Otherwise we print the piece.
 					System.out.print(piecesOnBoard[j][i]);
 				}
 

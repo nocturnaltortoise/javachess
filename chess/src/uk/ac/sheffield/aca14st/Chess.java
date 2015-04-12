@@ -1,4 +1,11 @@
+package uk.ac.sheffield.aca14st;
+
 import java.util.Scanner;
+
+/*
+ * Main Class for Chess
+ * Runs the main parts of the program and does the setup for the Chess program.
+ */
 
 public class Chess{
 
@@ -20,17 +27,20 @@ public class Chess{
 
         playerSetup(firstPlayerName, secondPlayerName, whitePieces, blackPieces, board);
 
-        System.out.println("White pieces are lower case, Black pieces are uppercase.");
-        consoleOutput.showPiecesOnBoard(board.getData());
-
-        boolean playerOneWon = false;
-        boolean playerTwoWon = false;
-
-        playGame(playerOneWon, playerTwoWon, consoleOutput, board);
+        playGame(consoleOutput, board);
 
     }
 
-    private static void playGame(boolean playerOneWon, boolean playerTwoWon, TextDisplay consoleOutput, Board board){
+    //Method to run the game itself.
+    private static void playGame(TextDisplay consoleOutput, Board board){
+        boolean playerOneWon = false;
+        boolean playerTwoWon = false;
+
+        //Starts with brief detail about reading the board for the players, and then displays the board.
+        System.out.println("White pieces are lower case, Black pieces are uppercase.");
+        consoleOutput.showPiecesOnBoard(board.getData());
+
+        //checks that neither player has won, and if not continues to ask for moves.
         while(!playerOneWon && !playerTwoWon){
             System.out.println("Player One's Move");
             if(firstPlayer.makeMove()){
@@ -46,6 +56,7 @@ public class Chess{
             consoleOutput.showPiecesOnBoard(board.getData());
         }
 
+        //depending on which player has won, display a different message.
         if(playerOneWon){
             System.out.println(firstPlayer.toString() + " has won!");
         }else if(playerTwoWon){
@@ -54,22 +65,23 @@ public class Chess{
 
     }
 
-    private static void playerSetup(String firstPlayerName, String secondPlayerName,
-                                    Pieces whitePieces, Pieces blackPieces, Board board){
+    //Setup the different players based on user input.
+    private static void playerSetup(String firstPlayerName, String secondPlayerName, Pieces whitePieces, Pieces blackPieces, Board board){
 
-        boolean asking = true;
-        while(asking){
+        //Make sure the player colour choice is valid, and set the colour of each player, and their opponent, accordingly.
+        boolean valid = false;
+        while(!valid){
             String playerColourChoice = inputPlayerColour();
             if(playerColourChoice.equalsIgnoreCase("white")){
                 firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
                 secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
-                asking=false;
+                valid=true;
             }else if(playerColourChoice.equalsIgnoreCase("black")){
                 firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
                 secondPlayer = new HumanPlayer(secondPlayerName, whitePieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
-                asking=false;
+                valid=true;
             } else {
                 System.out.println("Enter a valid colour (black or white).");
             }
@@ -84,8 +96,6 @@ public class Chess{
 
     private static String inputPlayerColour(){
         System.out.println("Choose a colour, white or black: ");
-        String colour = keyboard.next();
-
-        return colour;
+        return keyboard.next();
     }
 }

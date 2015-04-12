@@ -1,11 +1,12 @@
+package uk.ac.sheffield.aca14st;
+
 import java.util.ArrayList;
 
-/**
- * Created by simon on 31/03/15.
- */
 public class King extends Piece {
 
     public King(int x, int y, int colour, Board board){
+        //Calls the uk.ac.sheffield.aca14st.Piece constructor with the char symbol for the king
+        //as well as the other details fed into the uk.ac.sheffield.aca14st.King's constructor.
         super(PieceCode.KING, x, y, colour, board);
     }
 
@@ -19,6 +20,7 @@ public class King extends Piece {
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
 
+        //Each of these method calls checks a different adjacent square.
         checkSquares(x,y,getX(),getY()+1,vector);
         checkSquares(x,y,getX(),getY()-1,vector);
         checkSquares(x,y,getX()+1,getY(),vector);
@@ -28,9 +30,15 @@ public class King extends Piece {
         checkSquares(x,y,getX()-1,getY()+1,vector);
         checkSquares(x,y,getX()-1,getY(),vector);
 
+        //if none of these squares are valid, an empty arraylist will be returned,
+        //so no inputted move by the user will be contained.
         return vector;
     }
 
+    /*
+     *Checks an inputted square to see whether the square is occupied or out of range,
+     *and adds a different legal move to the arraylist depending on that.
+     */
     private void checkSquares(int x, int y, int nextX, int nextY, ArrayList<Move> vector){
         Move legalMove = null;
         if(!getBoard().outOfRange(nextX,nextY)){
