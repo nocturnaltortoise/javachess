@@ -18,6 +18,6 @@ package uk.ac.sheffield.aca14st;
 */
 
 public interface Display {
-  public void showPiecesOnBoard(Piece[][] data);
+    public void showPiecesOnBoard(Piece[][] data);
 }
 
