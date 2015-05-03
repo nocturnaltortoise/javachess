@@ -104,7 +104,7 @@ public class Pieces {
       b.setPosition(7,7, p);
     }
 
-//     add 1 queen
+    //add 1 queen
     if (c==Player.WHITE) {
       p = new Queen(3,0,c,board);
       data.add(p);
@@ -116,7 +116,7 @@ public class Pieces {
       b.setPosition(3,7, p);
     }
 
-    // and finally 1 uk.ac.sheffield.aca14st.King
+    // and finally 1 King
     if (c==Player.WHITE) {
       p = new King(4,0,c,board);
       data.add(p);

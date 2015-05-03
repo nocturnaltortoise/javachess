@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class King extends Piece {
 
     public King(int x, int y, int colour, Board board){
-        //Calls the uk.ac.sheffield.aca14st.Piece constructor with the char symbol for the king
-        //as well as the other details fed into the uk.ac.sheffield.aca14st.King's constructor.
+        //Calls the Piece constructor with the char symbol for the king
+        //as well as the other details fed into the King's constructor.
         super(PieceCode.KING, x, y, colour, board);
     }
 
@@ -21,16 +21,22 @@ public class King extends Piece {
         int x = getX();
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
+        //array of grid refs adjacent to the King.
+        int[][] directions = {
+                {getX(),getY()+1},
+                {getX(),getY()-1},
+                {getX()+1,getY()},
+                {getX()+1,getY()+1},
+                {getX()+1,getY()-1},
+                {getX()-1,getY()-1},
+                {getX()-1,getY()+1},
+                {getX()-1,getY()}
+        };
 
         //Each of these method calls checks a different adjacent square.
-        checkSquares(x,y,getX(),getY()+1,vector);
-        checkSquares(x,y,getX(),getY()-1,vector);
-        checkSquares(x,y,getX()+1,getY(),vector);
-        checkSquares(x,y,getX()+1,getY()+1,vector);
-        checkSquares(x,y,getX()+1,getY()-1,vector);
-        checkSquares(x,y,getX()-1,getY()-1,vector);
-        checkSquares(x,y,getX()-1,getY()+1,vector);
-        checkSquares(x,y,getX()-1,getY(),vector);
+        for(int i=0; i<8; i++){
+            checkSquares(x,y,directions[i][0],directions[i][1],vector);
+        }
 
         //if none of these squares are valid, an empty arraylist will be returned,
         //so no inputted move by the user will be contained.

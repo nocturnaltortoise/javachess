@@ -22,6 +22,7 @@ public class Bishop extends Piece{
         int x = getX();
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
+
         Move legalMove = null;
 
         /*
