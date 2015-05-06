@@ -13,7 +13,7 @@ public class AggressivePlayer extends Player{
             //for each of those pieces, check every valid move
                 //if any of the valid moves are occupied by an enemy piece, check the value of that piece
                     //move the piece that can take the most valuable piece
-        
+
         return kingTaken;
     }
 }

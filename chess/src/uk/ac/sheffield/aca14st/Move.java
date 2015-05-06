@@ -26,9 +26,29 @@ public class Move {
         return piece;
     }
 
+    public int getCurrentXPosition(){
+        return currentXPosition;
+    }
+
+    public int getCurrentYPosition(){
+        return currentYPosition;
+    }
+
+    public int getNewXPosition(){
+        return newXPosition;
+    }
+
+    public int getNewYPosition(){
+        return newYPosition;
+    }
+
+    public boolean targetIsOccupied(){
+        return isOccupied;
+    }
+
     //Returns some basic info about a move - mostly useful for debugging.
     public String toString(){
-        return "uk.ac.sheffield.aca14st.Piece: " + piece.toString()
+        return "Piece: " + piece.toString()
                 + " Moving from: " + currentXPosition + ", " + currentYPosition
                 + " To: " + newXPosition + ", " + newYPosition
                 + " Target Occupied? " + isOccupied;

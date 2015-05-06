@@ -45,7 +45,7 @@ public class Pawn extends Piece {
         if (y==7) return v;
         if (getBoard().outOfRange(x,y+1)) return v;
 
-        // set up m to refer to a uk.ac.sheffield.aca14st.Move object
+        // set up m to refer to a Move object
         Move m;
 
         if (y == 1) {

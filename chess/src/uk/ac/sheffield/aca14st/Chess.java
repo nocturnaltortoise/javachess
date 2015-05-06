@@ -12,25 +12,28 @@ import java.util.Scanner;
 public class Chess{
 
     private static Scanner keyboard = new Scanner(System.in);
-    private static HumanPlayer firstPlayer = null;
-    private static HumanPlayer secondPlayer = null;
+    private static RandomPlayer firstPlayer = null;
+    private static RandomPlayer secondPlayer = null;
 
     public static void main(String[] args){
 
         String firstPlayerName = inputPlayerName();
         String secondPlayerName = inputPlayerName();
-
+//
         Board board = new Board();
-
+//
         Pieces whitePieces = new Pieces(board, 1);
         Pieces blackPieces = new Pieces(board, 0);
-
+//
         TextDisplay consoleOutput = new TextDisplay();
-//        GraphicalDisplay test = new GraphicalDisplay();
-
+////        GraphicalDisplay test = new GraphicalDisplay();
+//
         playerSetup(firstPlayerName, secondPlayerName, whitePieces, blackPieces, board);
-
+//
         playGame(consoleOutput, board);
+
+//        RandomPlayer test = new RandomPlayer("test",whitePieces,board,null);
+//        test.makeMove();
 
     }
 
@@ -76,13 +79,13 @@ public class Chess{
         while(!valid){
             String playerColourChoice = inputPlayerColour();
             if(playerColourChoice.equalsIgnoreCase("white")){
-                firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
-                secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
+                firstPlayer = new RandomPlayer(firstPlayerName, whitePieces, board, null);
+                secondPlayer = new RandomPlayer(secondPlayerName, blackPieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             }else if(playerColourChoice.equalsIgnoreCase("black")){
-                firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
-                secondPlayer = new HumanPlayer(secondPlayerName, whitePieces, board, firstPlayer);
+                firstPlayer = new RandomPlayer(firstPlayerName, blackPieces, board, null);
+                secondPlayer = new RandomPlayer(secondPlayerName, whitePieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             } else {
