@@ -13,21 +13,19 @@ public class RandomPlayer extends Player{
         boolean kingTaken = false;
 
         Move randomMove = getRandomMove(getRandomPiece(this), this);
-        System.out.println(randomMove);
         int initX = randomMove.getCurrentXPosition();
         int initY = randomMove.getCurrentYPosition();
         int newX = randomMove.getNewXPosition();
         int newY = randomMove.getNewYPosition();
         Piece movingPiece = randomMove.getPiece();
-        System.out.println(movingPiece);
 
         if(randomMove.targetIsOccupied()){
-            this.getBoard().remove(newX, newY);
             kingTaken = PieceCode.charToInt(this.getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING;
+            this.getBoard().remove(newX, newY);
         }else{
-            this.getBoard().getData()[randomMove.getNewXPosition()][randomMove.getNewYPosition()] = movingPiece;
+            this.getBoard().getData()[newX][newY] = movingPiece;
             movingPiece.setPosition(newX, newY);
-            getBoard().remove(initX, initY);
+            this.getBoard().remove(initX, initY);
         }
 
         return kingTaken;
@@ -40,8 +38,6 @@ public class RandomPlayer extends Player{
         while(randomPiece.availableMoves().isEmpty()){
             randomPiece = getRandomPiece(player);
         }
-
-        System.out.println(randomPiece.availableMoves() + " Is Empty? : " + randomPiece.availableMoves().isEmpty());
 
         return randomPiece.availableMoves().get(randNumGen.nextInt(randomPiece.availableMoves().size()));
 
