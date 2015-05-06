@@ -48,13 +48,9 @@ public class RandomPlayer extends Player{
         Random randNumGen = new Random();
 
         if(player == this){
-
             return this.getPieces().getPiece(randNumGen.nextInt(this.getPieces().getNumPieces()));
-
         }else{
-
             return this.getOpponent().getPieces().getPiece(randNumGen.nextInt(this.getPieces().getNumPieces()));
-
         }
 
     }

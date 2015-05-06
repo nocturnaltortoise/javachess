@@ -50,14 +50,14 @@ public class Pawn extends Piece {
 
         if (y == 1) {
             if(!getBoard().occupied(x,y+2) && !getBoard().occupied(x,y+1)){
-                m = new Move(this, x, y, x, y+2, false);
+                m = new Move(this, x, y, x, y+2, false, this.getBoard());
                 v.add(m);
             }
         }
 
         // first legal move is to go from x,y to x,y+1 if x,y+1 is unoccupied
         if (!getBoard().occupied(x,y+1)) {
-            m = new Move(this, x,y,x,y+1,false);
+            m = new Move(this, x,y,x,y+1,false, this.getBoard());
             v.add(m);
         }
 
@@ -67,7 +67,7 @@ public class Pawn extends Piece {
                 && getBoard().occupied(x+1, y+1)
                 && (getBoard().getPiece(x+1, y+1).getColour()
                 !=this.getColour())) {
-            m = new Move(this, x,getY(),x+1,y+1,true);
+            m = new Move(this, x,getY(),x+1,y+1,true, this.getBoard());
             v.add(m);
         }
 
@@ -77,7 +77,7 @@ public class Pawn extends Piece {
                 && getBoard().occupied(x-1, y+1)
                 && (getBoard().getPiece(x-1, y+1).getColour()
                 !=this.getColour())) {
-            m = new Move(this, x,y,x-1,y+1,true);
+            m = new Move(this, x,y,x-1,y+1,true, this.getBoard());
             v.add(m);
         }
 
@@ -100,14 +100,14 @@ public class Pawn extends Piece {
 
         if (y == 6) {
             if(!getBoard().occupied(x,y-2) && !getBoard().occupied(x,y-1)){
-                m = new Move(this, x, y, x, y-2, false);
+                m = new Move(this, x, y, x, y-2, false, this.getBoard());
                 v.add(m);
             }
         }
 
         // first legal move is to go from x,y to x,y-1 if x,y-1 is unoccupied
         if (!getBoard().occupied(x,y-1)) {
-            m = new Move(this, x,y,x,y-1,false);
+            m = new Move(this, x,y,x,y-1,false, this.getBoard());
             v.add(m);
         }
 
@@ -117,7 +117,7 @@ public class Pawn extends Piece {
                 && getBoard().occupied(x+1, y-1)
                 && (getBoard().getPiece(x+1, y-1).getColour()
                 !=this.getColour())) {
-            m = new Move(this, x,y,x+1,y-1,true);
+            m = new Move(this, x,y,x+1,y-1,true, this.getBoard());
             v.add(m);
         }
 
@@ -127,7 +127,7 @@ public class Pawn extends Piece {
                 && getBoard().occupied(x-1, y-1)
                 && (getBoard().getPiece(x-1, y-1).getColour()
                 !=this.getColour())) {
-            m = new Move(this, x,y,x-1,y-1,true);
+            m = new Move(this, x,y,x-1,y-1,true, this.getBoard());
             v.add(m);
         }
 

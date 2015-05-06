@@ -34,7 +34,7 @@ public class Bishop extends Piece{
 
         while(!getBoard().outOfRange(nextX, nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true);
+                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }
 
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
@@ -42,7 +42,7 @@ public class Bishop extends Piece{
             }
 
             if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false);
+                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
             }
 
             vector.add(legalMove);
@@ -55,7 +55,7 @@ public class Bishop extends Piece{
 
         while(!getBoard().outOfRange(nextX, nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true);
+                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }
 
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
@@ -63,7 +63,7 @@ public class Bishop extends Piece{
             }
 
             if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false);
+                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
             }
 
             vector.add(legalMove);
@@ -76,7 +76,7 @@ public class Bishop extends Piece{
 
         while(!getBoard().outOfRange(nextX, nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true);
+                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }
 
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
@@ -84,7 +84,7 @@ public class Bishop extends Piece{
             }
 
             if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false);
+                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
             }
 
             vector.add(legalMove);
@@ -97,7 +97,7 @@ public class Bishop extends Piece{
 
         while(!getBoard().outOfRange(nextX, nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true);
+                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }
 
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
@@ -105,7 +105,7 @@ public class Bishop extends Piece{
             }
 
             if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false);
+                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
             }
 
             vector.add(legalMove);

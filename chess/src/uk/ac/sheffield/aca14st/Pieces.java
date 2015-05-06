@@ -131,6 +131,9 @@ public class Pieces {
     numData=10;
   }
 
+  public ArrayList<Piece> getData(){
+      return data;
+  }
   //added a getColour method to return the colour of this set of pieces.
   public int getColour(){
     return colour;

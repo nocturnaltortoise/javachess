@@ -47,11 +47,11 @@ public class Knight extends Piece {
         Move legalMove = null;
         if(!getBoard().outOfRange(nextX,nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true);
+                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }
 
             if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false);
+                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
             }
 
             if(legalMove != null){

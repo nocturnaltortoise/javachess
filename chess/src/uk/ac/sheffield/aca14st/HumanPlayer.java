@@ -47,7 +47,7 @@ public class HumanPlayer extends Player{
             }
 
             Piece movingPiece = getBoard().getPiece(initX, initY);
-            Move playerMove = new Move(movingPiece, initX, initY, newX, newY, targetOccupied);
+            Move playerMove = new Move(movingPiece, initX, initY, newX, newY, targetOccupied, this.getBoard());
 
             //Make sure that there is a piece on the square the player has inputted.
             if(movingPiece == null){
