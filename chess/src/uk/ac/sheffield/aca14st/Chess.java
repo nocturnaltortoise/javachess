@@ -17,20 +17,20 @@ public class Chess{
 
     public static void main(String[] args){
 
-        String firstPlayerName = inputPlayerName();
-        String secondPlayerName = inputPlayerName();
+//        String firstPlayerName = inputPlayerName();
+//        String secondPlayerName = inputPlayerName();
 //
-        Board board = new Board();
+//        Board board = new Board();
 //
-        Pieces whitePieces = new Pieces(board, 1);
-        Pieces blackPieces = new Pieces(board, 0);
+//        Pieces whitePieces = new Pieces(board, 1);
+//        Pieces blackPieces = new Pieces(board, 0);
 //
-        TextDisplay consoleOutput = new TextDisplay();
-////        GraphicalDisplay test = new GraphicalDisplay();
+//        TextDisplay consoleOutput = new TextDisplay();
+        GraphicalDisplay test = new GraphicalDisplay();
+
+//        playerSetup(firstPlayerName, secondPlayerName, whitePieces, blackPieces, board);
 //
-        playerSetup(firstPlayerName, secondPlayerName, whitePieces, blackPieces, board);
-//
-        playGame(consoleOutput, board);
+//        playGame(consoleOutput, board);
 
 //        RandomPlayer test = new RandomPlayer("test",whitePieces,board,null);
 //        test.makeMove();
