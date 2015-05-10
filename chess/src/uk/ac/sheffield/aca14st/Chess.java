@@ -12,25 +12,30 @@ import java.util.Scanner;
 public class Chess{
 
     private static Scanner keyboard = new Scanner(System.in);
-    private static AggressivePlayer firstPlayer = null;
-    private static AggressivePlayer secondPlayer = null;
+    private static HumanPlayer firstPlayer = null;
+    private static HumanPlayer secondPlayer = null;
+    private static Board board = new Board();
 
     public static void main(String[] args){
 
-//        String firstPlayerName = inputPlayerName();
-//        String secondPlayerName = inputPlayerName();
+        String firstPlayerName = inputPlayerName();
+        String secondPlayerName = inputPlayerName();
 //
-//        Board board = new Board();
+        Pieces whitePieces = new Pieces(board, 1);
+        Pieces blackPieces = new Pieces(board, 0);
 //
-//        Pieces whitePieces = new Pieces(board, 1);
-//        Pieces blackPieces = new Pieces(board, 0);
-//
-//        TextDisplay consoleOutput = new TextDisplay();
-        GraphicalDisplay test = new GraphicalDisplay();
+        playerSetup(firstPlayerName, secondPlayerName, whitePieces, blackPieces, board);
 
-//        playerSetup(firstPlayerName, secondPlayerName, whitePieces, blackPieces, board);
+//        for(Piece[] pieces : board.getData()){
+//            for(Piece piece : pieces){
+//                System.out.print(piece);
+//            }
+//        }
+//        TextDisplay consoleOutput = new TextDisplay();
+        GraphicalDisplay graphicalOutput = new GraphicalDisplay();
+
 //
-//        playGame(consoleOutput, board);
+        playGame(graphicalOutput, board);
 
 //        RandomPlayer test = new RandomPlayer("test",whitePieces,board,null);
 //        test.makeMove();
@@ -38,28 +43,28 @@ public class Chess{
     }
 
     //Method to run the game itself.
-    private static void playGame(TextDisplay consoleOutput, Board board){
+    private static void playGame(GraphicalDisplay graphicalOutput, Board board){
         boolean playerOneWon = false;
         boolean playerTwoWon = false;
 
         //Starts with brief detail about reading the board for the players, and then displays the board.
         System.out.println("White pieces are lower case, Black pieces are uppercase.");
-        consoleOutput.showPiecesOnBoard(board.getData());
+        graphicalOutput.showPiecesOnBoard(board.getData());
 
         //checks that neither player has won, and if not continues to ask for moves.
         while(!playerOneWon && !playerTwoWon){
-            System.out.println("Player One's Move");
+//            System.out.println("Player One's Move");
             if(firstPlayer.makeMove()){
                 playerOneWon = true;
                 break;
             }
-            consoleOutput.showPiecesOnBoard(board.getData());
-            System.out.println("Player Two's Move");
+            graphicalOutput.showPiecesOnBoard(board.getData());
+//            System.out.println("Player Two's Move");
             if(secondPlayer.makeMove()){
                 playerTwoWon = true;
                 break;
             }
-            consoleOutput.showPiecesOnBoard(board.getData());
+            graphicalOutput.showPiecesOnBoard(board.getData());
         }
 
         //depending on which player has won, display a different message.
@@ -79,13 +84,13 @@ public class Chess{
         while(!valid){
             String playerColourChoice = inputPlayerColour();
             if(playerColourChoice.equalsIgnoreCase("white")){
-                firstPlayer = new AggressivePlayer(firstPlayerName, whitePieces, board, null);
-                secondPlayer = new AggressivePlayer(secondPlayerName, blackPieces, board, firstPlayer);
+                firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
+                secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             }else if(playerColourChoice.equalsIgnoreCase("black")){
-                firstPlayer = new AggressivePlayer(firstPlayerName, blackPieces, board, null);
-                secondPlayer = new AggressivePlayer(secondPlayerName, whitePieces, board, firstPlayer);
+                firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
+                secondPlayer = new HumanPlayer(secondPlayerName, whitePieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             } else {
@@ -93,6 +98,10 @@ public class Chess{
             }
         }
 
+    }
+
+    public static Board getChessBoard(){
+        return board;
     }
 
     private static String inputPlayerName(){

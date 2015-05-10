@@ -7,46 +7,32 @@ import java.awt.event.ActionListener;
 
 public class GraphicalDisplay extends JFrame implements Display, ActionListener {
 
+    JButton[][] chessSquares = new JButton[8][8];
+    static boolean clicking = false;
+
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
-        int i;
-        int j = 1;
 
-        int gridRef = 0;
-
-        System.out.println(" ABCDEFGH");
-
-        for(i = 0; i < piecesOnBoard[j-1].length; i++){
-            System.out.print(gridRef);
-            gridRef++;
-            for(j = 0; j < piecesOnBoard.length; j++){
-                //If a square has nothing in it, it's null, so we print a dash.
-                if(piecesOnBoard[j][i] == null){
-                    System.out.print("-");
+        for(int i=0; i<chessSquares.length; i++){
+            for(int j=0; j<chessSquares[i].length; j++){
+                String labelString;
+                if(piecesOnBoard[j][i] != null){
+                    labelString = piecesOnBoard[j][i].toString();
                 }else{
-                    //Otherwise we print the piece.
-                    System.out.print(piecesOnBoard[j][i]);
+                    labelString = "";
                 }
 
+                chessSquares[i][j].setText(labelString);
             }
         }
     }
 
-    public GraphicalDisplay(){
-        //set up a basic Jframe window
-        setTitle("Java Chess");
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        setSize(screenSize.width / 2, screenSize.height / 2);
-        setLocation(new Point(screenSize.width / 4, screenSize.height / 4));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+    public void initialisePanel(){
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridLayout(8,8));
 
-        JButton[][] chessSquares = new JButton[8][8];
-
         for(int i=0; i<chessSquares.length; i++){
             for(int j=0; j<chessSquares[i].length; j++){
+
                 JButton button = new JButton();
 
                 if((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1)){
@@ -65,37 +51,57 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
                 contentPane.add(chessSquares[i][j]);
             }
         }
+    }
 
+    public GraphicalDisplay(){
+        //set up a basic Jframe window
+        setTitle("Java Chess");
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        setSize(screenSize.width / 2, screenSize.height / 2);
+        setLocation(new Point(screenSize.width / 4, screenSize.height / 4));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        initialisePanel();
     }
 
     @Override
     public void actionPerformed(ActionEvent event){
-        System.out.println("Button clicked: " + event.getSource());
+        System.out.println("Button clicked: " + event.getActionCommand());
+
+        int initX = 0;
+        int initY = 0;
+        int newX = 0;
+        int newY = 0;
+
+        int clickCount = 1;
+        for(int i=0; i<chessSquares.length; i++){
+            for(int j=0; j<chessSquares[i].length; j++){
+                clickCount++;
+                if(event.getSource() == chessSquares[i][j]){
+                    System.out.println(j + "," + i);
+                    System.out.println(Chess.getChessBoard().getPiece(j,i));
+                    if(clickCount % 2 == 1){
+                        initX = j;
+                        initY = i;
+                    }else{
+                        newX = j;
+                        newY = i;
+                    }
+                }
+            }
+        }
+        System.out.println("Coords: " + initX + "," + initY + "," + newX + "," + newY);
+        selectMove(initX, initY, newX, newY);
+        clicking = true;
     }
 
-    //some adapters for buttons and things
+    public static boolean playerIsClicking(){
+        return clicking;
+    }
 
-//    private class GridButtonHandler implements ActionListener {
-//
-//        public GridButtonHandler(){
-//
-//        }
-//
-//        public void actionPerformed(ActionEvent event){
-//
-//        }
-//
-//    }
-//
-//
-//    private class GridSquare extends JButton{
-//
-//        public GridSquare(){
-//
-//        }
-//
-//    }
-
-
+    public void selectMove(int initX, int initY, int newX, int newY){
+        HumanPlayer.setGraphicalMove(initX,initY,newX,newY);
+    }
 
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class HumanPlayer extends Player{
 
     private static Scanner moveInput = new Scanner(System.in);
+    static int[][] move = new int[2][2];
 
     public HumanPlayer(String n, Pieces p, Board b, Player o){
         super(n, p, b, o);
@@ -19,25 +20,13 @@ public class HumanPlayer extends Player{
         boolean kingTaken = false;
 
         //checks whether the user's grid references are valid inputs.
-        while(!legalMove){
+        while(!legalMove && GraphicalDisplay.playerIsClicking()){
 
-            String[][] move = getMove();
+            int initX = move[0][0];
+            int initY = move[0][1];
+            int newX = move[1][0];
+            int newY = move[1][1];
 
-            //check that the inputted coordinates are valid.
-            if(letterToNumber(move[0][0]) > 7
-                    || letterToNumber(move[0][0]) < 0
-                    || letterToNumber(move[1][0]) > 7
-                    || letterToNumber(move[1][0]) < 0) {
-                System.out.println("Enter a valid move.");
-                legalMove = false;
-                continue;
-            }
-
-            //Setup all the move coordinates as individual integers.
-            int initX = letterToNumber(move[0][0]);
-            int initY = Integer.parseInt(move[0][1]);
-            int newX = letterToNumber(move[1][0]);
-            int newY = Integer.parseInt(move[1][1]);
             //check whether the target square is occupied.
             boolean targetOccupied = getBoard().occupied(newX, newY);
 
@@ -97,6 +86,13 @@ public class HumanPlayer extends Player{
 
         return move;
 
+    }
+
+    public static void setGraphicalMove(int initX, int initY, int newX, int newY){
+        move[0][0] = initX;
+        move[0][1] = initY;
+        move[1][0] = newX;
+        move[1][1] = newY;
     }
 
     private int letterToNumber(String letter){
