@@ -24,12 +24,20 @@ public class AggressivePlayer extends Player{
         if(aggressiveMove.targetIsOccupied()){
             kingTaken = PieceCode.charToInt(this.getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING;
             this.getBoard().remove(newX, newY);
+            movingPiece.setPosition(newX, newY);
+            this.getBoard().getData()[newX][newY] = movingPiece;
+            this.getBoard().remove(initX, initY);
         }else{
             this.getBoard().getData()[newX][newY] = movingPiece;
             movingPiece.setPosition(newX, newY);
             this.getBoard().remove(initX, initY);
         }
 
+       try{
+           Thread.sleep(1000);
+       }catch(InterruptedException interrupt){
+           Thread.currentThread().interrupt();
+       }
 
         return kingTaken;
     }

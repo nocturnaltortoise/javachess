@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class Chess{
 
     private static Scanner keyboard = new Scanner(System.in);
-    private static HumanPlayer firstPlayer = null;
-    private static HumanPlayer secondPlayer = null;
+    private static AggressivePlayer firstPlayer = null;
+    private static AggressivePlayer secondPlayer = null;
     private static Board board = new Board();
 
     public static void main(String[] args){
@@ -86,13 +86,13 @@ public class Chess{
         while(!valid){
             String playerColourChoice = inputPlayerColour();
             if(playerColourChoice.equalsIgnoreCase("white")){
-                firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
-                secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
+                firstPlayer = new AggressivePlayer(firstPlayerName, whitePieces, board, null);
+                secondPlayer = new AggressivePlayer(secondPlayerName, blackPieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             }else if(playerColourChoice.equalsIgnoreCase("black")){
-                firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
-                secondPlayer = new HumanPlayer(secondPlayerName, whitePieces, board, firstPlayer);
+                firstPlayer = new AggressivePlayer(firstPlayerName, blackPieces, board, null);
+                secondPlayer = new AggressivePlayer(secondPlayerName, whitePieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             } else {
