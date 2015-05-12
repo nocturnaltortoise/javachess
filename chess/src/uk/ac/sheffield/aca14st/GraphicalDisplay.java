@@ -114,7 +114,6 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
             state = UserState.FINISHED_CLICKING;
         }
 
-        System.out.println(state);
         //Needs work - I guess this is slowing things down.
         for(int i=0; i<chessSquares.length; i++){
             for(int j=0; j<chessSquares[i].length; j++){

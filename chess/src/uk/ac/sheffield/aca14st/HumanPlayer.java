@@ -17,16 +17,18 @@ public class HumanPlayer extends Player{
     //Makes a move inputted by the player. Returns true when the player takes the king.
     @Override
     public boolean makeMove(){
-        boolean legalMove = false;
+//        boolean legalMove = false;
         boolean kingTaken = false;
 
         //checks whether the user's grid references are valid inputs.
-        if(!legalMove && GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
+        if(GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
 
             int initX = move[0][0];
             int initY = move[0][1];
             int newX = move[1][0];
             int newY = move[1][1];
+
+            System.out.println("In HumanPlayer: " + initX + "," + initY + "," + newX + "," + newY);
 
             //check whether the target square is occupied.
             boolean targetOccupied = getBoard().occupied(newX, newY);
@@ -65,25 +67,25 @@ public class HumanPlayer extends Player{
     }
 
     //Gets the user's input for a move and makes it usable by makeMove.
-    private String[][] getMove(){
-        System.out.println("Enter a move in the form (grid-ref of piece, grid-ref of target) e.g. (a3,a4).");
-        String input = moveInput.next();
-
-        while(!input.contains(",")){
-            System.out.println("Enter a valid input in the form grid-ref,grid-ref.");
-            input = moveInput.next();
-        }
-
-        String[] rawMove = input.split(",");
-        //splits the move string into 4 parts - letter,number letter,number
-        String[][] move = {
-                {rawMove[0].substring(0,1),rawMove[0].substring(1,2)},
-                {rawMove[1].substring(0,1),rawMove[1].substring(1,2)}
-        };
-
-        return move;
-
-    }
+//    private String[][] getMove(){
+//        System.out.println("Enter a move in the form (grid-ref of piece, grid-ref of target) e.g. (a3,a4).");
+//        String input = moveInput.next();
+//
+//        while(!input.contains(",")){
+//            System.out.println("Enter a valid input in the form grid-ref,grid-ref.");
+//            input = moveInput.next();
+//        }
+//
+//        String[] rawMove = input.split(",");
+//        //splits the move string into 4 parts - letter,number letter,number
+//        String[][] move = {
+//                {rawMove[0].substring(0,1),rawMove[0].substring(1,2)},
+//                {rawMove[1].substring(0,1),rawMove[1].substring(1,2)}
+//        };
+//
+//        return move;
+//
+//    }
 
     public static void setGraphicalMove(int initX, int initY, int newX, int newY){
         move[0][0] = initX;
@@ -92,27 +94,27 @@ public class HumanPlayer extends Player{
         move[1][1] = newY;
     }
 
-    private int letterToNumber(String letter){
-        switch(letter.toLowerCase()){
-            case "a":
-                return 0;
-            case "b":
-                return 1;
-            case "c":
-                return 2;
-            case "d":
-                return 3;
-            case "e":
-                return 4;
-            case "f":
-                return 5;
-            case "g":
-                return 6;
-            case "h":
-                return 7;
-            default:
-                return 10;
-                //only way this would happen would be if the letter isn't a grid ref
-        }
-    }
+//    private int letterToNumber(String letter){
+//        switch(letter.toLowerCase()){
+//            case "a":
+//                return 0;
+//            case "b":
+//                return 1;
+//            case "c":
+//                return 2;
+//            case "d":
+//                return 3;
+//            case "e":
+//                return 4;
+//            case "f":
+//                return 5;
+//            case "g":
+//                return 6;
+//            case "h":
+//                return 7;
+//            default:
+//                return 10;
+//                //only way this would happen would be if the letter isn't a grid ref
+//        }
+//    }
 }

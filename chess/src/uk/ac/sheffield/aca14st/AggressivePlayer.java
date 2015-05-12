@@ -34,10 +34,12 @@ public class AggressivePlayer extends Player{
         }
 
        try{
-           Thread.sleep(1000);
+           Thread.sleep(1500);
        }catch(InterruptedException interrupt){
            Thread.currentThread().interrupt();
        }
+
+        GraphicalDisplay.setUserState(UserState.FINISHED_CLICKING);
 
         return kingTaken;
     }

@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class Chess{
 
     private static Scanner keyboard = new Scanner(System.in);
-    private static AggressivePlayer firstPlayer = null;
-    private static AggressivePlayer secondPlayer = null;
+    private static RandomPlayer firstPlayer = null;
+    private static RandomPlayer secondPlayer = null;
     private static Board board = new Board();
 
     public static void main(String[] args){
@@ -26,19 +26,11 @@ public class Chess{
 //
         playerSetup(firstPlayerName, secondPlayerName, whitePieces, blackPieces, board);
 
-//        for(Piece[] pieces : board.getData()){
-//            for(Piece piece : pieces){
-//                System.out.print(piece);
-//            }
-//        }
 //        TextDisplay consoleOutput = new TextDisplay();
         GraphicalDisplay graphicalOutput = new GraphicalDisplay();
         graphicalOutput.showPiecesOnBoard(board.getData());
 //
         playGame(graphicalOutput, board);
-
-//        RandomPlayer test = new RandomPlayer("test",whitePieces,board,null);
-//        test.makeMove();
 
     }
 
@@ -53,20 +45,37 @@ public class Chess{
 
         //checks that neither player has won, and if not continues to ask for moves.
         while(!playerOneWon && !playerTwoWon){
-//            System.out.println("Player One's Move");
-            if(firstPlayer.makeMove()){
-                playerOneWon = true;
-                break;
+
+            try{
+                Thread.sleep(5000);
+            }catch(InterruptedException interrupt){
+                Thread.currentThread().interrupt();
             }
-//            GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
-            graphicalOutput.showPiecesOnBoard(board.getData());
-//            System.out.println("Player Two's Move");
-            if(secondPlayer.makeMove()){
-                playerTwoWon = true;
-                break;
+
+            if(!firstPlayer.getClass().getName().equals("HumanPlayer") || GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
+                if(firstPlayer.makeMove()){
+                    playerOneWon = true;
+                    break;
+                }
+                GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
+                graphicalOutput.showPiecesOnBoard(board.getData());
             }
-//            GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
-            graphicalOutput.showPiecesOnBoard(board.getData());
+
+            try{
+                Thread.sleep(5000);
+            }catch(InterruptedException interrupt){
+                Thread.currentThread().interrupt();
+            }
+
+            if(!firstPlayer.getClass().getName().equals("HumanPlayer") || GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
+                if(secondPlayer.makeMove()){
+                    playerTwoWon = true;
+                    break;
+                }
+                GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
+                graphicalOutput.showPiecesOnBoard(board.getData());
+            }
+
         }
 
         //depending on which player has won, display a different message.
@@ -86,13 +95,13 @@ public class Chess{
         while(!valid){
             String playerColourChoice = inputPlayerColour();
             if(playerColourChoice.equalsIgnoreCase("white")){
-                firstPlayer = new AggressivePlayer(firstPlayerName, whitePieces, board, null);
-                secondPlayer = new AggressivePlayer(secondPlayerName, blackPieces, board, firstPlayer);
+                firstPlayer = new RandomPlayer(firstPlayerName, whitePieces, board, null);
+                secondPlayer = new RandomPlayer(secondPlayerName, blackPieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             }else if(playerColourChoice.equalsIgnoreCase("black")){
-                firstPlayer = new AggressivePlayer(firstPlayerName, blackPieces, board, null);
-                secondPlayer = new AggressivePlayer(secondPlayerName, whitePieces, board, firstPlayer);
+                firstPlayer = new RandomPlayer(firstPlayerName, blackPieces, board, null);
+                secondPlayer = new RandomPlayer(secondPlayerName, whitePieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             } else {
