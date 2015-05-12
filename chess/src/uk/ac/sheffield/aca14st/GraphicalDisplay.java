@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 public class GraphicalDisplay extends JFrame implements Display, ActionListener {
 
     JButton[][] chessSquares = new JButton[8][8];
+    UserState state = UserState.NOT_CLICKING;
+
 //    static boolean clicking = false;
 //    static int clickCount = 1;
 //    static int initX = 0;
@@ -63,7 +65,7 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
 
     public void initialisePanel(){
         Container contentPane = getContentPane();
-        contentPane.setLayout(new GridLayout(8,8));
+        contentPane.setLayout(new GridLayout(8, 8));
 
         for(int i=0; i<chessSquares.length; i++){
             for(int j=0; j<chessSquares[i].length; j++){
@@ -105,6 +107,13 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
     public void actionPerformed(ActionEvent event){
         System.out.println("Button clicked: " + event.getActionCommand());
 
+        if(state == UserState.NOT_CLICKING) {
+            state = UserState.STARTED_CLICKING;
+        }else if(state == UserState.STARTED_CLICKING){
+            state = UserState.FINISHED_CLICKING;
+        }
+
+        System.out.println(state);
 //        //Needs work
 //        for(int i=0; i<chessSquares.length; i++){
 //            for(int j=0; j<chessSquares[i].length; j++){
