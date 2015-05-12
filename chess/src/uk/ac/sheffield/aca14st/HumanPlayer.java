@@ -20,7 +20,7 @@ public class HumanPlayer extends Player{
         boolean kingTaken = false;
 
         //checks whether the user's grid references are valid inputs.
-        while(!legalMove && GraphicalDisplay.playerIsClicking()){
+        while(!legalMove);{
 
             int initX = move[0][0];
             int initY = move[0][1];
@@ -40,9 +40,8 @@ public class HumanPlayer extends Player{
 
             //Make sure that there is a piece on the square the player has inputted.
             if(movingPiece == null){
-                System.out.println("Enter a valid move.");
+                System.out.println("Enter a valid move. (Moving piece is null)");
                 legalMove = false;
-                continue;
             }
 
             /*

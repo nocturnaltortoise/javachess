@@ -33,9 +33,9 @@ public class Chess{
 //        }
 //        TextDisplay consoleOutput = new TextDisplay();
         GraphicalDisplay graphicalOutput = new GraphicalDisplay();
-
+        graphicalOutput.showPiecesOnBoard(board.getData());
 //
-        playGame(graphicalOutput, board);
+//        playGame(graphicalOutput, board);
 
 //        RandomPlayer test = new RandomPlayer("test",whitePieces,board,null);
 //        test.makeMove();

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Queen extends Piece {
 
     public Queen(int x, int y, int colour, Board b){
-        //Calls the uk.ac.sheffield.aca14st.Piece constructor with the char symbol for the queen
+        //Calls the Piece constructor with the char symbol for the queen
         //as well as the other details fed into the uk.ac.sheffield.aca14st.Queen's constructor.
         super(PieceCode.QUEEN, x, y, colour, b);
     }

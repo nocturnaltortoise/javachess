@@ -8,21 +8,56 @@ import java.awt.event.ActionListener;
 public class GraphicalDisplay extends JFrame implements Display, ActionListener {
 
     JButton[][] chessSquares = new JButton[8][8];
-    static boolean clicking = false;
+//    static boolean clicking = false;
+//    static int clickCount = 1;
+//    static int initX = 0;
+//    static int initY = 0;
+//    static int newX = 0;
+//    static int newY = 0;
 
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
-
         for(int i=0; i<chessSquares.length; i++){
             for(int j=0; j<chessSquares[i].length; j++){
                 String labelString;
                 if(piecesOnBoard[j][i] != null){
-                    labelString = piecesOnBoard[j][i].toString();
+                    labelString = getChessUnicode(piecesOnBoard[j][i].toString());
                 }else{
                     labelString = "";
                 }
 
                 chessSquares[i][j].setText(labelString);
             }
+        }
+    }
+
+    public String getChessUnicode(String piece){
+        switch(piece){
+            case "P":
+                return "\u265F";
+            case "p":
+                return "\u2659";
+            case "R":
+                return "\u265C";
+            case "r":
+                return "\u2656";
+            case "N":
+                return "\u265E";
+            case "n":
+                return "\u2658";
+            case "B":
+                return "\u265D";
+            case "b":
+                return "\u2657";
+            case "Q":
+                return "\u265B";
+            case "q":
+                return "\u2655";
+            case "K":
+                return "\u265A";
+            case "k":
+                return "\u2654";
+            default:
+                return piece;
         }
     }
 
@@ -38,7 +73,7 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
                 if((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1)){
                     button.setBackground(Color.WHITE);
                 }else{
-                    button.setBackground(Color.BLACK);
+                    button.setBackground(Color.LIGHT_GRAY);
                 }
 
                 button.addActionListener(this);
@@ -58,7 +93,8 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
         setTitle("Java Chess");
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
-        setSize(screenSize.width / 2, screenSize.height / 2);
+//        setSize(screenSize.width / 2, screenSize.height / 2);
+        setSize(500,500);
         setLocation(new Point(screenSize.width / 4, screenSize.height / 4));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -69,39 +105,35 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
     public void actionPerformed(ActionEvent event){
         System.out.println("Button clicked: " + event.getActionCommand());
 
-        int initX = 0;
-        int initY = 0;
-        int newX = 0;
-        int newY = 0;
-
-        int clickCount = 1;
-        for(int i=0; i<chessSquares.length; i++){
-            for(int j=0; j<chessSquares[i].length; j++){
-                clickCount++;
-                if(event.getSource() == chessSquares[i][j]){
-                    System.out.println(j + "," + i);
-                    System.out.println(Chess.getChessBoard().getPiece(j,i));
-                    if(clickCount % 2 == 1){
-                        initX = j;
-                        initY = i;
-                    }else{
-                        newX = j;
-                        newY = i;
-                    }
-                }
-            }
-        }
-        System.out.println("Coords: " + initX + "," + initY + "," + newX + "," + newY);
-        selectMove(initX, initY, newX, newY);
-        clicking = true;
+//        //Needs work
+//        for(int i=0; i<chessSquares.length; i++){
+//            for(int j=0; j<chessSquares[i].length; j++){
+//                if(event.getSource() == chessSquares[i][j]){
+//                    System.out.println(j + "," + i);
+//                    System.out.println(Chess.getChessBoard().getPiece(j,i));
+//                    if(clickCount % 2 == 0){
+//                        newX = j;
+//                        newY = i;
+//                        System.out.println(clickCount);
+//                        selectMove(initX, initY, newX, newY);
+//                    }else{
+//                        initX = j;
+//                        initY = i;
+//                        System.out.println(clickCount);
+//                    }
+//                    clickCount++;
+//                }
+//            }
+//        }
     }
 
-    public static boolean playerIsClicking(){
-        return clicking;
-    }
-
-    public void selectMove(int initX, int initY, int newX, int newY){
-        HumanPlayer.setGraphicalMove(initX,initY,newX,newY);
-    }
+//    public void selectMove(int initX, int initY, int newX, int newY){
+//        if(clickCount % 2 == 0){
+//            System.out.println("Coords: " + initX + "," + initY + "," + newX + "," + newY);
+//            System.out.println("" + Chess.getChessBoard().getPiece(initX, initY) + Chess.getChessBoard().getPiece(newX, newY));
+//            HumanPlayer.setGraphicalMove(initX, initY, newX, newY);
+//        }
+//
+//    }
 
 }
