@@ -8,14 +8,14 @@ import java.awt.event.ActionListener;
 public class GraphicalDisplay extends JFrame implements Display, ActionListener {
 
     JButton[][] chessSquares = new JButton[8][8];
-    UserState state = UserState.NOT_CLICKING;
+    static UserState state = UserState.NOT_CLICKING;
 
 //    static boolean clicking = false;
 //    static int clickCount = 1;
-//    static int initX = 0;
-//    static int initY = 0;
-//    static int newX = 0;
-//    static int newY = 0;
+    static int initX = 0;
+    static int initY = 0;
+    static int newX = 0;
+    static int newY = 0;
 
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
         for(int i=0; i<chessSquares.length; i++){
@@ -28,6 +28,7 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
                 }
 
                 chessSquares[i][j].setText(labelString);
+                chessSquares[i][j].setFont(chessSquares[i][j].getFont().deriveFont(30.0f));
             }
         }
     }
@@ -114,35 +115,43 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
         }
 
         System.out.println(state);
-//        //Needs work
-//        for(int i=0; i<chessSquares.length; i++){
-//            for(int j=0; j<chessSquares[i].length; j++){
-//                if(event.getSource() == chessSquares[i][j]){
-//                    System.out.println(j + "," + i);
-//                    System.out.println(Chess.getChessBoard().getPiece(j,i));
-//                    if(clickCount % 2 == 0){
-//                        newX = j;
-//                        newY = i;
-//                        System.out.println(clickCount);
-//                        selectMove(initX, initY, newX, newY);
-//                    }else{
-//                        initX = j;
-//                        initY = i;
-//                        System.out.println(clickCount);
-//                    }
-//                    clickCount++;
-//                }
-//            }
-//        }
+        //Needs work - I guess this is slowing things down.
+        for(int i=0; i<chessSquares.length; i++){
+            for(int j=0; j<chessSquares[i].length; j++){
+                if(event.getSource() == chessSquares[i][j]){
+                    System.out.println(j + "," + i);
+                    System.out.println(Chess.getChessBoard().getPiece(j,i));
+                    if(state == UserState.STARTED_CLICKING){
+                        initX = j;
+                        initY = i;
+                    }else{
+                        newX = j;
+                        newY = i;
+                    }
+                }
+            }
+        }
+
+        if(state == UserState.FINISHED_CLICKING){
+            selectMove(initX, initY, newX, newY);
+        }
     }
 
-//    public void selectMove(int initX, int initY, int newX, int newY){
+    public void selectMove(int initX, int initY, int newX, int newY){
 //        if(clickCount % 2 == 0){
-//            System.out.println("Coords: " + initX + "," + initY + "," + newX + "," + newY);
-//            System.out.println("" + Chess.getChessBoard().getPiece(initX, initY) + Chess.getChessBoard().getPiece(newX, newY));
-//            HumanPlayer.setGraphicalMove(initX, initY, newX, newY);
+            System.out.println("Coords: " + initX + "," + initY + "," + newX + "," + newY);
+            System.out.println("" + Chess.getChessBoard().getPiece(initX, initY) + Chess.getChessBoard().getPiece(newX, newY));
+            HumanPlayer.setGraphicalMove(initX, initY, newX, newY);
 //        }
-//
-//    }
+
+    }
+
+    public static UserState getUserState(){
+        return state;
+    }
+
+    public static void setUserState(UserState newState){
+        state = newState;
+    }
 
 }

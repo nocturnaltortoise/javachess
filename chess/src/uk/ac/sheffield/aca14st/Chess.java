@@ -35,7 +35,7 @@ public class Chess{
         GraphicalDisplay graphicalOutput = new GraphicalDisplay();
         graphicalOutput.showPiecesOnBoard(board.getData());
 //
-//        playGame(graphicalOutput, board);
+        playGame(graphicalOutput, board);
 
 //        RandomPlayer test = new RandomPlayer("test",whitePieces,board,null);
 //        test.makeMove();
@@ -58,12 +58,14 @@ public class Chess{
                 playerOneWon = true;
                 break;
             }
+//            GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
             graphicalOutput.showPiecesOnBoard(board.getData());
 //            System.out.println("Player Two's Move");
             if(secondPlayer.makeMove()){
                 playerTwoWon = true;
                 break;
             }
+//            GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
             graphicalOutput.showPiecesOnBoard(board.getData());
         }
 

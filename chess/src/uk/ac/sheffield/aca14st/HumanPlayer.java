@@ -1,5 +1,6 @@
 package uk.ac.sheffield.aca14st;
 
+import java.awt.font.GraphicAttribute;
 import java.util.Scanner;
 
 /**@author Simon Turner (aca14st) */
@@ -20,7 +21,7 @@ public class HumanPlayer extends Player{
         boolean kingTaken = false;
 
         //checks whether the user's grid references are valid inputs.
-        while(!legalMove);{
+        if(!legalMove && GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
 
             int initX = move[0][0];
             int initY = move[0][1];
@@ -41,7 +42,6 @@ public class HumanPlayer extends Player{
             //Make sure that there is a piece on the square the player has inputted.
             if(movingPiece == null){
                 System.out.println("Enter a valid move. (Moving piece is null)");
-                legalMove = false;
             }
 
             /*
@@ -56,10 +56,8 @@ public class HumanPlayer extends Player{
                 getBoard().getData()[newX][newY] = movingPiece;
                 movingPiece.setPosition(newX, newY);
                 getBoard().remove(initX, initY);
-                legalMove = true;
             }else{
                 System.out.println("Move is not legal. Enter a legal move.");
-                legalMove = false;
             }
         }
 
