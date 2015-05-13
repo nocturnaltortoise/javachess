@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class Chess{
 
     private static Scanner keyboard = new Scanner(System.in);
-    private static RandomPlayer firstPlayer = null;
-    private static RandomPlayer secondPlayer = null;
+    private static HumanPlayer firstPlayer = null;
+    private static HumanPlayer secondPlayer = null;
     private static Board board = new Board();
 
     public static void main(String[] args){
@@ -44,38 +44,11 @@ public class Chess{
         graphicalOutput.showPiecesOnBoard(board.getData());
 
         //checks that neither player has won, and if not continues to ask for moves.
-        while(!playerOneWon && !playerTwoWon){
-
-//            try{
-//                Thread.sleep(5000);
-//            }catch(InterruptedException interrupt){
-//                Thread.currentThread().interrupt();
-//            }
-
-            if(!firstPlayer.getClass().getName().equals("HumanPlayer") || GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
-                if(firstPlayer.makeMove()){
-                    playerOneWon = true;
-                    break;
-                }
-                GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
-                graphicalOutput.showPiecesOnBoard(board.getData());
-            }
-
-//            try{
-//                Thread.sleep(5000);
-//            }catch(InterruptedException interrupt){
-//                Thread.currentThread().interrupt();
-//            }
-
-            if(!firstPlayer.getClass().getName().equals("HumanPlayer") || GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
-                if(secondPlayer.makeMove()){
-                    playerTwoWon = true;
-                    break;
-                }
-                GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
-                graphicalOutput.showPiecesOnBoard(board.getData());
-            }
-
+        while(!playerOneWon && !playerTwoWon) {
+            playerOneWon = firstPlayer.makeMove();
+            graphicalOutput.showPiecesOnBoard(board.getData());
+            playerTwoWon = secondPlayer.makeMove();
+            graphicalOutput.showPiecesOnBoard(board.getData());
         }
 
         //depending on which player has won, display a different message.
@@ -95,13 +68,13 @@ public class Chess{
         while(!valid){
             String playerColourChoice = inputPlayerColour();
             if(playerColourChoice.equalsIgnoreCase("white")){
-                firstPlayer = new RandomPlayer(firstPlayerName, whitePieces, board, null);
-                secondPlayer = new RandomPlayer(secondPlayerName, blackPieces, board, firstPlayer);
+                firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
+                secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             }else if(playerColourChoice.equalsIgnoreCase("black")){
-                firstPlayer = new RandomPlayer(firstPlayerName, blackPieces, board, null);
-                secondPlayer = new RandomPlayer(secondPlayerName, whitePieces, board, firstPlayer);
+                firstPlayer = new HumanPlayer(firstPlayerName, blackPieces, board, null);
+                secondPlayer = new HumanPlayer(secondPlayerName, whitePieces, board, firstPlayer);
                 firstPlayer.setOpponent(secondPlayer);
                 valid=true;
             } else {
