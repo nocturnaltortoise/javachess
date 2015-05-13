@@ -1,14 +1,10 @@
 package uk.ac.sheffield.aca14st;
 
-import java.awt.font.GraphicAttribute;
-import java.util.Scanner;
-
 /**@author Simon Turner (aca14st) */
 
 public class HumanPlayer extends Player{
 
-    private static Scanner moveInput = new Scanner(System.in);
-    static int[][] move = new int[2][2];
+    static int[][] move = GraphicalDisplay.getClickCoordinates();
 
     public HumanPlayer(String n, Pieces p, Board b, Player o){
         super(n, p, b, o);
@@ -17,12 +13,12 @@ public class HumanPlayer extends Player{
     //Makes a move inputted by the player. Returns true when the player takes the king.
     @Override
     public boolean makeMove(){
-//        boolean legalMove = false;
+        boolean legalMove = false;
         boolean kingTaken = false;
 
         waitForMove();
         //checks whether the user's grid references are valid inputs.
-        if(GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
+        while(!legalMove && GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
 
             int initX = move[0][0];
             int initY = move[0][1];
@@ -46,7 +42,9 @@ public class HumanPlayer extends Player{
             if(movingPiece == null){
                 GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
                 System.out.println("Enter a valid move. (Moving piece is null)");
+                legalMove = false;
                 waitForMove();
+                continue;
             }
 
             /*
@@ -61,12 +59,13 @@ public class HumanPlayer extends Player{
                 getBoard().getData()[newX][newY] = movingPiece;
                 movingPiece.setPosition(newX, newY);
                 getBoard().remove(initX, initY);
+                legalMove = true;
             }else{
-                System.out.println("Move is not legal. Enter a legal move.");
+                GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
+                System.out.println("Move is not legal. Enter a legal move." + GraphicalDisplay.getUserState());
+                legalMove = false;
                 waitForMove();
             }
-
-
         }
 
         GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
@@ -82,13 +81,6 @@ public class HumanPlayer extends Player{
                 Thread.currentThread().interrupt();
             }
         }
-    }
-
-    public static void setGraphicalMove(int initX, int initY, int newX, int newY){
-        move[0][0] = initX;
-        move[0][1] = initY;
-        move[1][0] = newX;
-        move[1][1] = newY;
     }
 
 }

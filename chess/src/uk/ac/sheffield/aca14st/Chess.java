@@ -45,8 +45,10 @@ public class Chess{
 
         //checks that neither player has won, and if not continues to ask for moves.
         while(!playerOneWon && !playerTwoWon) {
+            System.out.println("Player One");
             playerOneWon = firstPlayer.makeMove();
             graphicalOutput.showPiecesOnBoard(board.getData());
+            System.out.println("Player Two");
             playerTwoWon = secondPlayer.makeMove();
             graphicalOutput.showPiecesOnBoard(board.getData());
         }

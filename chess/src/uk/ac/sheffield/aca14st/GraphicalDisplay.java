@@ -10,12 +10,7 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
     JButton[][] chessSquares = new JButton[8][8];
     static UserState state = UserState.NOT_CLICKING;
 
-//    static boolean clicking = false;
-//    static int clickCount = 1;
-    static int initX = 0;
-    static int initY = 0;
-    static int newX = 0;
-    static int newY = 0;
+    static int[][] clickCoordinates = new int[2][2];
 
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){
         for(int i=0; i<chessSquares.length; i++){
@@ -121,28 +116,19 @@ public class GraphicalDisplay extends JFrame implements Display, ActionListener 
                     System.out.println(j + "," + i);
                     System.out.println(Chess.getChessBoard().getPiece(j,i));
                     if(state == UserState.STARTED_CLICKING){
-                        initX = j;
-                        initY = i;
+                        clickCoordinates[0][0] = j;
+                        clickCoordinates[0][1] = i;
                     }else{
-                        newX = j;
-                        newY = i;
+                        clickCoordinates[1][0] = j;
+                        clickCoordinates[1][1] = i;
                     }
                 }
             }
         }
-
-        if(state == UserState.FINISHED_CLICKING){
-            selectMove(initX, initY, newX, newY);
-        }
     }
 
-    public void selectMove(int initX, int initY, int newX, int newY){
-//        if(clickCount % 2 == 0){
-            System.out.println("Coords: " + initX + "," + initY + "," + newX + "," + newY);
-            System.out.println("" + Chess.getChessBoard().getPiece(initX, initY) + Chess.getChessBoard().getPiece(newX, newY));
-            HumanPlayer.setGraphicalMove(initX, initY, newX, newY);
-//        }
-
+    public static int[][] getClickCoordinates(){
+        return clickCoordinates;
     }
 
     public static UserState getUserState(){
