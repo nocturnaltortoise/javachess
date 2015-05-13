@@ -46,11 +46,11 @@ public class Chess{
         //checks that neither player has won, and if not continues to ask for moves.
         while(!playerOneWon && !playerTwoWon){
 
-            try{
-                Thread.sleep(5000);
-            }catch(InterruptedException interrupt){
-                Thread.currentThread().interrupt();
-            }
+//            try{
+//                Thread.sleep(5000);
+//            }catch(InterruptedException interrupt){
+//                Thread.currentThread().interrupt();
+//            }
 
             if(!firstPlayer.getClass().getName().equals("HumanPlayer") || GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
                 if(firstPlayer.makeMove()){
@@ -61,11 +61,11 @@ public class Chess{
                 graphicalOutput.showPiecesOnBoard(board.getData());
             }
 
-            try{
-                Thread.sleep(5000);
-            }catch(InterruptedException interrupt){
-                Thread.currentThread().interrupt();
-            }
+//            try{
+//                Thread.sleep(5000);
+//            }catch(InterruptedException interrupt){
+//                Thread.currentThread().interrupt();
+//            }
 
             if(!firstPlayer.getClass().getName().equals("HumanPlayer") || GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
                 if(secondPlayer.makeMove()){
