@@ -22,7 +22,8 @@ public class AggressivePlayer extends Player{
         Piece movingPiece = aggressiveMove.getPiece();
 
         if(aggressiveMove.targetIsOccupied()){
-            kingTaken = PieceCode.charToInt(this.getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING;
+            kingTaken = this.getBoard().getPiece(newX, newY) instanceof King;
+            System.out.println(kingTaken);
             this.getBoard().remove(newX, newY);
             movingPiece.setPosition(newX, newY);
             this.getBoard().getData()[newX][newY] = movingPiece;

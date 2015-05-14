@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Bishop extends Piece{
 
+    static boolean blocked = false;
+
     public Bishop(int x, int y, int colour, Board board){
         //Calls the uk.ac.sheffield.aca14st.Piece constructor with the char symbol for the bishop
         //as well as the other details fed into the uk.ac.sheffield.aca14st.Bishop's constructor.
@@ -19,6 +21,7 @@ public class Bishop extends Piece{
 
     //bishop's legal moves account for half of the queen's legal moves (the diagonals).
     public ArrayList<Move> bishop(){
+        blocked = false;
         int x = getX();
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
@@ -54,13 +57,15 @@ public class Bishop extends Piece{
 
     private void checkSquares(int x, int y, int nextX, int nextY, ArrayList<Move> vector){
         Move legalMove = null;
-        if(!getBoard().outOfRange(nextX,nextY)){
+        if(!blocked && !getBoard().outOfRange(nextX,nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
                 legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }
 
             if(!getBoard().occupied(nextX, nextY)){
                 legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
+            }else{
+                blocked = true;
             }
 
             if(legalMove != null){

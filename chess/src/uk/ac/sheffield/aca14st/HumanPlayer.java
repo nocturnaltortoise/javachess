@@ -32,7 +32,8 @@ public class HumanPlayer extends Player{
 
             //if taking a piece, check whether the piece is a king.
             if(targetOccupied){
-                kingTaken = PieceCode.charToInt(getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING;
+//                kingTaken = PieceCode.charToInt(getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING;
+                kingTaken = this.getBoard().getPiece(newX, newY) instanceof King;
             }
 
             Piece movingPiece = getBoard().getPiece(initX, initY);

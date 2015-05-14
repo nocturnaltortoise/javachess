@@ -20,7 +20,7 @@ public class RandomPlayer extends Player{
         Piece movingPiece = randomMove.getPiece();
 
         if(randomMove.targetIsOccupied()){
-            kingTaken = PieceCode.charToInt(this.getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING;
+            kingTaken = this.getBoard().getPiece(newX, newY) instanceof King;
             this.getBoard().remove(newX, newY);
             movingPiece.setPosition(newX, newY);
             this.getBoard().getData()[newX][newY] = movingPiece;
