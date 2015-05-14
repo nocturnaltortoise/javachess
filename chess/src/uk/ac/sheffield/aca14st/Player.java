@@ -5,59 +5,74 @@ package uk.ac.sheffield.aca14st;
  *
  * Copyright (c) University of Sheffield 2015
  */
- 
+
+
+import java.util.ArrayList;
 
 /**
-* uk.ac.sheffield.aca14st.Player.java
-*
-* Abstract class to represent a chess player
-*
-* @version 1.1 26 January 2015
-*
-* @author Richard Clayton  (r.h.clayton@sheffield.ac.uk), Steve Maddock (s.c.maddock@sheffield.ac.uk)
-*/
+ * uk.ac.sheffield.aca14st.Player.java
+ * <p>
+ * Abstract class to represent a chess player
+ *
+ * @author Richard Clayton  (r.h.clayton@sheffield.ac.uk), Steve Maddock (s.c.maddock@sheffield.ac.uk)
+ * @version 1.1 26 January 2015
+ */
 
 public abstract class Player {
 
-  public static final int BLACK = 0;
-  public static final int WHITE = 1;
+    public static final int BLACK = 0;
+    public static final int WHITE = 1;
 
-  private String name;
-  private Pieces pieces;
-  private Board board;
-  private Player opponent;
+    private String name;
+    private Pieces pieces;
+    private Board board;
+    private Player opponent;
+    private ArrayList<Piece> takenPieces = new ArrayList<>();
 
-  public Player (String n, Pieces p, Board b, Player o) {
-    name = n;
-    pieces = p;
-    board = b;
-    opponent = o;
-  }
+    public Player(String n, Pieces p, Board b, Player o) {
+        name = n;
+        pieces = p;
+        board = b;
+        opponent = o;
+    }
 
-  public Board getBoard() {
-    return board;
-  }
+    public ArrayList<Piece> getTakenPieces(){
+        return takenPieces;
+    }
 
-  public Player getOpponent() {
-    return opponent;
-  }
+    public String takenPiecesToString(ArrayList<Piece> pieces){
+        String list = "";
+        for(Piece piece : pieces){
+            list += ChessBoard.getChessUnicode(piece.toString());
+        }
 
-  public void setOpponent(Player p) {
-    opponent = p;
-  }
+        return list;
+    }
 
-  public Pieces getPieces() {
-    return pieces;
-  }
+    public Board getBoard() {
+        return board;
+    }
 
-  public abstract boolean makeMove();
- 
-  public void deletePiece(Piece p) {
-    pieces.delete(p);
-  }
+    public Player getOpponent() {
+        return opponent;
+    }
 
-  public String toString() {
-    return name;
-  }
+    public void setOpponent(Player p) {
+        opponent = p;
+    }
+
+    public Pieces getPieces() {
+        return pieces;
+    }
+
+    public abstract boolean makeMove();
+
+    public void deletePiece(Piece p) {
+        pieces.delete(p);
+    }
+
+    public String toString() {
+        return name;
+    }
 
 }

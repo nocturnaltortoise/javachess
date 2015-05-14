@@ -21,6 +21,8 @@ public class RandomPlayer extends Player{
 
         if(randomMove.targetIsOccupied()){
             kingTaken = this.getBoard().getPiece(newX, newY) instanceof King;
+            super.getTakenPieces().add(getBoard().getPiece(newX, newY));
+            InfoPanel.getTakenPieceLabel().setText(super.takenPiecesToString(getTakenPieces()));
             this.getBoard().remove(newX, newY);
             movingPiece.setPosition(newX, newY);
             this.getBoard().getData()[newX][newY] = movingPiece;
@@ -37,7 +39,7 @@ public class RandomPlayer extends Player{
             Thread.currentThread().interrupt();
         }
 
-        GraphicalDisplay.setUserState(UserState.FINISHED_CLICKING);
+        ChessBoard.setUserState(UserState.FINISHED_CLICKING);
 
         return kingTaken;
     }

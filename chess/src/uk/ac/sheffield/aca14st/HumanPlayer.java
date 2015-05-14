@@ -4,7 +4,7 @@ package uk.ac.sheffield.aca14st;
 
 public class HumanPlayer extends Player{
 
-    static int[][] move = GraphicalDisplay.getClickCoordinates();
+    static int[][] move = ChessBoard.getClickCoordinates();
 
     public HumanPlayer(String n, Pieces p, Board b, Player o){
         super(n, p, b, o);
@@ -18,21 +18,18 @@ public class HumanPlayer extends Player{
 
         waitForMove();
         //checks whether the user's grid references are valid inputs.
-        while(!legalMove && GraphicalDisplay.getUserState() == UserState.FINISHED_CLICKING){
+        while(!legalMove && ChessBoard.getUserState() == UserState.FINISHED_CLICKING){
 
             int initX = move[0][0];
             int initY = move[0][1];
             int newX = move[1][0];
             int newY = move[1][1];
 
-            System.out.println("In HumanPlayer: " + initX + "," + initY + "," + newX + "," + newY);
-
             //check whether the target square is occupied.
             boolean targetOccupied = getBoard().occupied(newX, newY);
 
             //if taking a piece, check whether the piece is a king.
             if(targetOccupied){
-//                kingTaken = PieceCode.charToInt(getBoard().getPiece(newX, newY).getChar()) == PieceCode.KING;
                 kingTaken = this.getBoard().getPiece(newX, newY) instanceof King;
             }
 
@@ -41,8 +38,8 @@ public class HumanPlayer extends Player{
 
             //Make sure that there is a piece on the square the player has inputted.
             if(movingPiece == null){
-                GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
-                System.out.println("Enter a valid move. (Moving piece is null)");
+                ChessBoard.setUserState(UserState.NOT_CLICKING);
+                InfoPanel.getAlertLabel().setText("There's no piece there. Select a valid piece.");
                 legalMove = false;
                 waitForMove();
                 continue;
@@ -54,9 +51,10 @@ public class HumanPlayer extends Player{
              *another move.
              */
 
-            System.out.println(movingPiece.availableMoves());
             if(movingPiece.availableMoves().contains(playerMove) && movingPiece.getColour() == this.getPieces().getColour()){
                 if(targetOccupied && getBoard().getPiece(newX, newY).getColour() != getBoard().getPiece(initX, initY).getColour()){
+                    super.getTakenPieces().add(getBoard().getPiece(newX, newY));
+                    InfoPanel.getTakenPieceLabel().setText(super.takenPiecesToString(getTakenPieces()));
                     getBoard().remove(newX, newY);
                 }
                 getBoard().getData()[newX][newY] = movingPiece;
@@ -64,23 +62,24 @@ public class HumanPlayer extends Player{
                 getBoard().remove(initX, initY);
                 legalMove = true;
             }else{
-                GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
-                System.out.println("Move is not legal. Enter a legal move." + GraphicalDisplay.getUserState());
+                ChessBoard.setUserState(UserState.NOT_CLICKING);
+                InfoPanel.getAlertLabel().setText("Move is not legal. Enter a legal move.");
                 legalMove = false;
                 waitForMove();
             }
         }
 
-        GraphicalDisplay.setUserState(UserState.NOT_CLICKING);
+        ChessBoard.setUserState(UserState.NOT_CLICKING);
         return kingTaken;
 
     }
 
     private static void waitForMove(){
-        while(GraphicalDisplay.getUserState() != UserState.FINISHED_CLICKING) {
+        while(ChessBoard.getUserState() != UserState.FINISHED_CLICKING) {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
             } catch (InterruptedException interrupt) {
+                System.err.println(interrupt);
                 Thread.currentThread().interrupt();
             }
         }

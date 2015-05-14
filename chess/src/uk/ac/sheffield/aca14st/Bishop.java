@@ -32,23 +32,27 @@ public class Bishop extends Piece{
          */
 
         //+1.+1
-        for(int i=getX()+1, j=getY()+1; i<8 || j<8; i++,j++) {
+        blocked = false;
+        for(int i=getX()+1, j=getY()+1; (i<8 || j<8) && !blocked; i++,j++) {
             checkSquares(getX(), getY(), i, j, vector);
         }
 
         //-1,-1
-        for(int i=getX()-1, j=getY()-1; i>-1 || j>-1; i--,j--){
+        blocked = false;
+        for(int i=getX()-1, j=getY()-1; (i>-1 || j>-1) && !blocked; i--,j--){
             checkSquares(getX(), getY(), i,j, vector);
 
         }
 
         //+1,-1
-        for(int i=getX()+1, j=getY()-1 ;i<8 || j>-1; i++,j--){
+        blocked = false;
+        for(int i=getX()+1, j=getY()-1 ;(i<8 || j>-1) && !blocked; i++,j--){
             checkSquares(getX(), getY(), i,j, vector);
         }
 
         //-1,+1
-        for(int i=getX()-1, j=getY()+1 ;i>-1 || j<8; i--,j++){
+        blocked = false;
+        for(int i=getX()-1, j=getY()+1 ;(i>-1 || j<8) && !blocked; i--,j++){
             checkSquares(getX(), getY(), i,j, vector);
         }
 
@@ -57,7 +61,7 @@ public class Bishop extends Piece{
 
     private void checkSquares(int x, int y, int nextX, int nextY, ArrayList<Move> vector){
         Move legalMove = null;
-        if(!blocked && !getBoard().outOfRange(nextX,nextY)){
+        if(!getBoard().outOfRange(nextX,nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
                 legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }

@@ -23,7 +23,8 @@ public class AggressivePlayer extends Player{
 
         if(aggressiveMove.targetIsOccupied()){
             kingTaken = this.getBoard().getPiece(newX, newY) instanceof King;
-            System.out.println(kingTaken);
+            super.getTakenPieces().add(getBoard().getPiece(newX, newY));
+            InfoPanel.getTakenPieceLabel().setText(super.takenPiecesToString(getTakenPieces()));
             this.getBoard().remove(newX, newY);
             movingPiece.setPosition(newX, newY);
             this.getBoard().getData()[newX][newY] = movingPiece;
@@ -40,7 +41,7 @@ public class AggressivePlayer extends Player{
            Thread.currentThread().interrupt();
        }
 
-        GraphicalDisplay.setUserState(UserState.FINISHED_CLICKING);
+        ChessBoard.setUserState(UserState.FINISHED_CLICKING);
 
         return kingTaken;
     }

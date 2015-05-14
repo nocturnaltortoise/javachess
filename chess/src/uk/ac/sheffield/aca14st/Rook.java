@@ -21,24 +21,26 @@ public class Rook extends Piece {
 
     //the rook's legal moves account for half the queen's legal moves (the rank and file).
     public ArrayList<Move> rook(){
-        blocked = false;
         int x = getX();
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
 
-        for(int i=x;i<8;i++){
+        for(int i=x+1;i<8 && !blocked;i++){
             checkSquares(x, y, i,y, vector);
         }
 
-        for(int i=x;i>-1;i--){
+        blocked = false;
+        for(int i=x-1;i>-1 && !blocked;i--){
             checkSquares(x, y,i,y, vector);
         }
 
-        for(int i=y;i<8;i++){
+        blocked = false;
+        for(int i=y+1;i<8 && !blocked;i++){
             checkSquares(x, y, x,i, vector);
         }
 
-        for(int i=y;i>-1;i--){
+        blocked = false;
+        for(int i=y-1;i>-1 && !blocked;i--){
             checkSquares(x, y, x,i, vector);
         }
 
@@ -47,12 +49,12 @@ public class Rook extends Piece {
 
     private void checkSquares(int x, int y, int nextX, int nextY, ArrayList<Move> vector){
         Move legalMove = null;
-        if(!blocked && !getBoard().outOfRange(nextX,nextY)){
+        if(!getBoard().outOfRange(nextX,nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
                 legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }
 
-            if(!getBoard().occupied(nextX, nextY)){
+            if(!getBoard().occupied(nextX, nextY)) {
                 legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
             }else{
                 blocked = true;

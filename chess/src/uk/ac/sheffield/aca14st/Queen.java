@@ -28,40 +28,48 @@ public class Queen extends Piece {
         //The queen's moves are the moves of the Rook and the Bishop. These loops are identical to those.
 
         //vertically upwards
-        for(int i=x;i<8;i++){
+        blocked = false;
+        for(int i=x+1;i<8 && !blocked;i++){
             checkSquares(x, y, i,y, vector);
         }
         //vertically downwards
-        for(int i=x;i>0;i--){
+        blocked = false;
+        for(int i=x-1;i>0 && !blocked;i--){
             checkSquares(x, y,i,y, vector);
         }
         //horizontally to the right
-        for(int i=y;i<8;i++){
+        blocked = false;
+        for(int i=y+1;i<8 && !blocked;i++){
             checkSquares(x, y, x,i, vector);
         }
         //horizontally to the left
-        for(int i=y;i>0;i--){
+        blocked = false;
+        for(int i=y-1;i>0 && !blocked;i--){
             checkSquares(x, y, x,i, vector);
         }
 
         //+1.+1
-        for(int i=getX()+1, j=getY()+1; i<8 || j<8; i++,j++) {
+        blocked = false;
+        for(int i=getX()+1, j=getY()+1; (i<8 || j<8) && !blocked; i++,j++) {
             checkSquares(getX(), getY(), i, j, vector);
         }
 
         //-1,-1
-        for(int i=getX()-1, j=getY()-1; i>-1 || j>-1; i--,j--){
+        blocked = false;
+        for(int i=getX()-1, j=getY()-1; (i>-1 || j>-1) && !blocked; i--,j--){
             checkSquares(getX(), getY(), i,j, vector);
 
         }
 
         //+1,-1
-        for(int i=getX()+1, j=getY()-1 ;i<8 || j>-1; i++,j--){
+        blocked = false;
+        for(int i=getX()+1, j=getY()-1 ;(i<8 || j>-1) && !blocked; i++,j--){
             checkSquares(getX(), getY(), i,j, vector);
         }
 
         //-1,+1
-        for(int i=getX()-1, j=getY()+1 ;i>-1 || j<8; i--,j++){
+        blocked = false;
+        for(int i=getX()-1, j=getY()+1 ;(i>-1 || j<8) && !blocked; i--,j++){
             checkSquares(getX(), getY(), i,j, vector);
         }
 
@@ -70,7 +78,7 @@ public class Queen extends Piece {
 
     private void checkSquares(int x, int y, int nextX, int nextY, ArrayList<Move> vector){
         Move legalMove = null;
-        if(!blocked && !getBoard().outOfRange(nextX,nextY)){
+        if(!getBoard().outOfRange(nextX,nextY)){
             if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
                 legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
             }

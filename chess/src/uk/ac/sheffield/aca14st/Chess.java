@@ -1,5 +1,6 @@
 package uk.ac.sheffield.aca14st;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**@author Simon Turner (aca14st) */
@@ -15,6 +16,8 @@ public class Chess{
     private static AggressivePlayer firstPlayer = null;
     private static AggressivePlayer secondPlayer = null;
     private static Board board = new Board();
+    private static String currentTurn = "";
+    private static String alertMessage = "";
 
     public static void main(String[] args){
 
@@ -40,19 +43,20 @@ public class Chess{
         boolean playerTwoWon = false;
 
         //Starts with brief detail about reading the board for the players, and then displays the board.
-        System.out.println("White pieces are lower case, Black pieces are uppercase.");
+        InfoPanel.getAlertLabel().setText("White pieces are lower case, Black pieces are uppercase.");
+
         graphicalOutput.showPiecesOnBoard(board.getData());
 
         //checks that neither player has won, and if not continues to ask for moves.
         while(!playerOneWon && !playerTwoWon) {
-            System.out.println("Player One");
+            InfoPanel.getTurnLabel().setText("Player One's Move");
             if(firstPlayer.makeMove()){
                 playerOneWon = true;
                 graphicalOutput.showPiecesOnBoard(board.getData());
                 break;
             }
             graphicalOutput.showPiecesOnBoard(board.getData());
-            System.out.println("Player Two");
+            InfoPanel.getTurnLabel().setText("Player Two's Move");
             if(secondPlayer.makeMove()){
                 playerTwoWon = true;
                 graphicalOutput.showPiecesOnBoard(board.getData());
@@ -63,9 +67,9 @@ public class Chess{
 
         //depending on which player has won, display a different message.
         if(playerOneWon){
-            System.out.println(firstPlayer.toString() + " has won!");
+            InfoPanel.getAlertLabel().setText(firstPlayer.toString() + " has won!");
         }else if(playerTwoWon){
-            System.out.println(secondPlayer.toString() + " has won!");
+            InfoPanel.getAlertLabel().setText(secondPlayer.toString() + " has won!");
         }
 
     }
@@ -92,6 +96,30 @@ public class Chess{
             }
         }
 
+    }
+
+    public static void setCurrentTurn(String turn){
+        currentTurn = turn;
+    }
+
+    public static String getCurrentTurn(){
+        return currentTurn;
+    }
+
+    public static void setAlert(String alert){
+        alertMessage = alert;
+    }
+
+    public static String getAlert(){
+        return alertMessage;
+    }
+
+    public static Player getFirstPlayer(){
+        return firstPlayer;
+    }
+
+    public static Player getSecondPlayer(){
+        return secondPlayer;
     }
 
     public static Board getChessBoard(){
