@@ -105,16 +105,16 @@ public class Pieces {
     }
 
     //add 1 queen
-//    if (c==Player.WHITE) {
-//      p = new Queen(3,0,c,board);
-//      data.add(p);
-//      b.setPosition(3,0, p);
-//    }
-//    else {
-//      p = new Queen(3,7,c,board);
-//      data.add(p);
-//      b.setPosition(3,7, p);
-//    }
+    if (c==Player.WHITE) {
+      p = new Queen(3,0,c,board);
+      data.add(p);
+      b.setPosition(3,0, p);
+    }
+    else {
+      p = new Queen(3,7,c,board);
+      data.add(p);
+      b.setPosition(3,7, p);
+    }
 //
 //    // and finally 1 King
 //    if (c==Player.WHITE) {
