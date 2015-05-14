@@ -61,7 +61,6 @@ public class King extends Piece {
             if(legalMove != null){
                 vector.add(legalMove);
             }
-
         }
     }
 }

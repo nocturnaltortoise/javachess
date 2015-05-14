@@ -23,96 +23,53 @@ public class Bishop extends Piece{
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
 
-        Move legalMove = null;
-
         /*
          *Each of these blocks defines a different diagonal move -
          *the length of the diagonal depends on whether the piece is blocked by another piece.
          */
-        int nextX = getX() + 1;
-        int nextY = getY() + 1;
 
-        while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
+        for(int i=x;i>8;i++){
+            for(int j=y;j>8;j++){
+                checkSquares(x, y, i,j, vector);
             }
-
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
-                break;
-            }
-
-            if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
-            }
-
-            vector.add(legalMove);
-            nextX++;
-            nextY++;
         }
 
-        nextX = getX() - 1;
-        nextY = getY() - 1;
-
-        while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
+        for(int i=x;i<0;i--){
+            for(int j=y;j<0;j--){
+                checkSquares(x, y, i,j, vector);
             }
-
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
-                break;
-            }
-
-            if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
-            }
-
-            vector.add(legalMove);
-            nextX--;
-            nextY--;
         }
 
-        nextX = getX() + 1;
-        nextY = getY() - 1;
-
-        while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
+        for(int i=x;i<8;i++){
+            for(int j=y;j<8;j++){
+                checkSquares(x, y, i,j, vector);
             }
-
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
-                break;
-            }
-
-            if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
-            }
-
-            vector.add(legalMove);
-            nextX++;
-            nextY--;
         }
 
-        nextX = getX() - 1;
-        nextY = getY() + 1;
-
-        while(!getBoard().outOfRange(nextX, nextY)){
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
-                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
+        for(int i=x;i>0;i--){
+            for(int j=y;j>0;j--){
+                checkSquares(x, y, i,j, vector);
             }
 
-            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() == this.getColour()){
-                break;
-            }
-
-            if(!getBoard().occupied(nextX, nextY)){
-                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
-            }
-
-            vector.add(legalMove);
-            nextX--;
-            nextY++;
         }
 
         return vector;
+    }
+
+    private void checkSquares(int x, int y, int nextX, int nextY, ArrayList<Move> vector){
+        Move legalMove = null;
+        if(!getBoard().outOfRange(nextX,nextY)){
+            if(getBoard().occupied(nextX, nextY) && getBoard().getPiece(nextX, nextY).getColour() != this.getColour()){
+                legalMove = new Move(this, x, y, nextX, nextY, true, this.getBoard());
+            }
+
+            if(!getBoard().occupied(nextX, nextY)){
+                legalMove = new Move(this, x, y, nextX, nextY, false, this.getBoard());
+            }
+
+            if(legalMove != null){
+                vector.add(legalMove);
+            }
+        }
     }
 }

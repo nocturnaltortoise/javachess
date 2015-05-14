@@ -52,6 +52,8 @@ public class HumanPlayer extends Player{
              *If there's an opposite colour piece under the target, take that piece. If the move isn't legal, prompt the user to enter
              *another move.
              */
+
+            System.out.println(movingPiece.availableMoves());
             if(movingPiece.availableMoves().contains(playerMove) && movingPiece.getColour() == this.getPieces().getColour()){
                 if(targetOccupied && getBoard().getPiece(newX, newY).getColour() != getBoard().getPiece(initX, initY).getColour()){
                     getBoard().remove(newX, newY);
