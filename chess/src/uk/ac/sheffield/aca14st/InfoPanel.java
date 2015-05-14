@@ -20,6 +20,7 @@ public class InfoPanel extends JPanel {
 
         this.add(turnLabel);
         turnLabel.setAlignmentX(this.CENTER_ALIGNMENT);
+        turnLabel.setFont(turnLabel.getFont().deriveFont(20.0f));
         this.add(playerOneLabel);
         playerOneLabel.setAlignmentX(this.CENTER_ALIGNMENT);
         this.add(playerTwoLabel);
@@ -28,6 +29,7 @@ public class InfoPanel extends JPanel {
         takenPieces.setAlignmentX(this.CENTER_ALIGNMENT);
         this.add(alertLabel);
         alertLabel.setAlignmentX(this.CENTER_ALIGNMENT);
+        alertLabel.setFont(alertLabel.getFont().deriveFont(15.0f));
         this.setSize(200, 500);
     }
 

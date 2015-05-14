@@ -61,6 +61,7 @@ public class HumanPlayer extends Player{
                 movingPiece.setPosition(newX, newY);
                 getBoard().remove(initX, initY);
                 legalMove = true;
+                InfoPanel.getAlertLabel().setText("");
             }else{
                 ChessBoard.setUserState(UserState.NOT_CLICKING);
                 InfoPanel.getAlertLabel().setText("Move is not legal. Enter a legal move.");

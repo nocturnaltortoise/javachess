@@ -67,7 +67,7 @@ public class ChessBoard extends JPanel implements ActionListener{
 
                     if(Chess.getChessBoard().getPiece(j,i) != null){
                         for(Move move : Chess.getChessBoard().getPiece(j,i).availableMoves()){
-                            chessSquares[move.getNewYPosition()][move.getNewXPosition()].setBackground(Color.CYAN);
+                            chessSquares[move.getNewYPosition()][move.getNewXPosition()].setBackground(Color.yellow);
                         }
                     }
 

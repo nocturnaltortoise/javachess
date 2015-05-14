@@ -1,6 +1,5 @@
 package uk.ac.sheffield.aca14st;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**@author Simon Turner (aca14st) */
@@ -13,37 +12,40 @@ import java.util.Scanner;
 public class Chess{
 
     private static Scanner keyboard = new Scanner(System.in);
-    private static AggressivePlayer firstPlayer = null;
-    private static AggressivePlayer secondPlayer = null;
+    private static Player firstPlayer;
+    private static Player secondPlayer;
     private static Board board = new Board();
     private static String currentTurn = "";
     private static String alertMessage = "";
 
     public static void main(String[] args){
 
-        String firstPlayerName = inputPlayerName();
-        String secondPlayerName = inputPlayerName();
-//
+        StartDialog test = new StartDialog();
+
+        while(test.getPlayerOneType() == null || test.getPlayerTwoType() == null){
+            try{
+                Thread.sleep(1000);
+            }catch(InterruptedException interrupt){
+                Thread.currentThread().interrupt();
+            }
+        }
+
+        startSetup(test.getPlayerOneType(),test.getPlayerTwoType());
+
+    }
+
+    public static void startSetup(String playerOneType, String playerTwoType){
         Pieces whitePieces = new Pieces(board, 1);
         Pieces blackPieces = new Pieces(board, 0);
-//
-        playerSetup(firstPlayerName, secondPlayerName, whitePieces, blackPieces, board);
-
-//        TextDisplay consoleOutput = new TextDisplay();
+        playerSetup("Player One", "Player Two", whitePieces, blackPieces, board, playerOneType, playerTwoType);
         GraphicalDisplay graphicalOutput = new GraphicalDisplay();
-        graphicalOutput.showPiecesOnBoard(board.getData());
-//
         playGame(graphicalOutput, board);
-
     }
 
     //Method to run the game itself.
     private static void playGame(GraphicalDisplay graphicalOutput, Board board){
         boolean playerOneWon = false;
         boolean playerTwoWon = false;
-
-        //Starts with brief detail about reading the board for the players, and then displays the board.
-        InfoPanel.getAlertLabel().setText("White pieces are lower case, Black pieces are uppercase.");
 
         graphicalOutput.showPiecesOnBoard(board.getData());
 
@@ -74,26 +76,33 @@ public class Chess{
 
     }
 
-    //Setup the different players based on user input.
-    private static void playerSetup(String firstPlayerName, String secondPlayerName, Pieces whitePieces, Pieces blackPieces, Board board){
+    private static void playerSetup(String firstPlayerName, String secondPlayerName, Pieces whitePieces, Pieces blackPieces, Board board, String p1Type, String p2Type){
 
-        //Make sure the player colour choice is valid, and set the colour of each player, and their opponent, accordingly.
-        boolean valid = false;
-        while(!valid){
-            String playerColourChoice = inputPlayerColour();
-            if(playerColourChoice.equalsIgnoreCase("white")){
+        switch(p1Type) {
+            case "Human":
+                firstPlayer = new HumanPlayer(firstPlayerName, whitePieces, board, null);
+                break;
+            case "Random AI":
+                firstPlayer = new RandomPlayer(firstPlayerName, whitePieces, board, null);
+                break;
+            case "Aggressive AI":
                 firstPlayer = new AggressivePlayer(firstPlayerName, whitePieces, board, null);
-                secondPlayer = new AggressivePlayer(secondPlayerName, blackPieces, board, firstPlayer);
+                break;
+        }
+
+        switch(p2Type) {
+            case "Human":
+                secondPlayer = new HumanPlayer(secondPlayerName, blackPieces, board, null);
                 firstPlayer.setOpponent(secondPlayer);
-                valid=true;
-            }else if(playerColourChoice.equalsIgnoreCase("black")){
-                firstPlayer = new AggressivePlayer(firstPlayerName, blackPieces, board, null);
-                secondPlayer = new AggressivePlayer(secondPlayerName, whitePieces, board, firstPlayer);
+                break;
+            case "Random AI":
+                secondPlayer = new RandomPlayer(secondPlayerName, blackPieces, board, null);
                 firstPlayer.setOpponent(secondPlayer);
-                valid=true;
-            } else {
-                System.out.println("Enter a valid colour (black or white).");
-            }
+                break;
+            case "Aggressive AI":
+                secondPlayer = new AggressivePlayer(secondPlayerName, blackPieces, board, null);
+                firstPlayer.setOpponent(secondPlayer);
+                break;
         }
 
     }
