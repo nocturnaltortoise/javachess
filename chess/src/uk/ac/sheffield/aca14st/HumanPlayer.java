@@ -54,7 +54,7 @@ public class HumanPlayer extends Player{
             if(movingPiece.availableMoves().contains(playerMove) && movingPiece.getColour() == this.getPieces().getColour()){
                 if(targetOccupied && getBoard().getPiece(newX, newY).getColour() != getBoard().getPiece(initX, initY).getColour()){
                     super.getTakenPieces().add(getBoard().getPiece(newX, newY));
-                    InfoPanel.getTakenPieceLabel().setText(super.takenPiecesToString(getTakenPieces()));
+                    InfoPanel.getTakenPieceLabel().setText(super.takenPiecesToString(getTakenPieces()) + super.takenPiecesToString(getOpponent().getTakenPieces()));
                     getBoard().remove(newX, newY);
                 }
                 getBoard().getData()[newX][newY] = movingPiece;

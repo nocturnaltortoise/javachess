@@ -27,9 +27,7 @@ public class StartDialog extends JFrame implements ActionListener {
         titleText.setFont(titleText.getFont().deriveFont(50.0f));
 
         JPanel lowerPanel = new JPanel();
-
         playerOneDropdown.addActionListener(this);
-
         playerTwoDropdown.addActionListener(this);
         JLabel vsText = new JLabel(" VS ");
         vsText.setFont(vsText.getFont().deriveFont(20.0f));
@@ -52,7 +50,7 @@ public class StartDialog extends JFrame implements ActionListener {
         this.add(upperPanel);
         this.add(lowerPanel);
         this.add(playButtonPanel);
-        this.setLayout(new GridLayout(3, 3));
+        this.setLayout(new GridLayout(3, 1));
         setVisible(true);
     }
 

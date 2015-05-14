@@ -27,6 +27,7 @@ public class InfoPanel extends JPanel {
         playerTwoLabel.setAlignmentX(this.CENTER_ALIGNMENT);
         this.add(takenPieces);
         takenPieces.setAlignmentX(this.CENTER_ALIGNMENT);
+        takenPieces.setFont(takenPieces.getFont().deriveFont(15.0f));
         this.add(alertLabel);
         alertLabel.setAlignmentX(this.CENTER_ALIGNMENT);
         alertLabel.setFont(alertLabel.getFont().deriveFont(15.0f));

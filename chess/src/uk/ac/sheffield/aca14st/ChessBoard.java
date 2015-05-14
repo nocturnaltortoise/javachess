@@ -36,6 +36,8 @@ public class ChessBoard extends JPanel implements ActionListener{
     }
 
     public static void showPiecesOnBoard(Piece[][] piecesOnBoard){
+        setNormalBackground();
+
         for(int i=0; i<chessSquares.length; i++){
             for(int j=0; j<chessSquares[i].length; j++){
                 String labelString;
@@ -53,17 +55,17 @@ public class ChessBoard extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent event){
 
-        if(state == UserState.NOT_CLICKING) {
-            state = UserState.STARTED_CLICKING;
-        }else if(state == UserState.STARTED_CLICKING){
-            state = UserState.FINISHED_CLICKING;
-        }
-
         setNormalBackground();
 
         for(int i=0; i<chessSquares.length; i++){
             for(int j=0; j<chessSquares[i].length; j++){
                 if(event.getSource() == chessSquares[i][j]){
+
+                    if(state == UserState.NOT_CLICKING) {
+                        state = UserState.STARTED_CLICKING;
+                    }else if(state == UserState.STARTED_CLICKING){
+                        state = UserState.FINISHED_CLICKING;
+                    }
 
                     if(Chess.getChessBoard().getPiece(j,i) != null){
                         for(Move move : Chess.getChessBoard().getPiece(j,i).availableMoves()){
