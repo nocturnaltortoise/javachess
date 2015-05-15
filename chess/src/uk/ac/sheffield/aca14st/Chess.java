@@ -2,11 +2,10 @@ package uk.ac.sheffield.aca14st;
 
 import java.util.Scanner;
 
-/**@author Simon Turner (aca14st) */
-
-/*
- * Main Class for Chess
+/**
+ * Chess
  * Runs the main parts of the program and does the setup for the Chess program.
+ * @author Simon Turner (aca14st)
  */
 
 public class Chess{
@@ -20,9 +19,10 @@ public class Chess{
 
     public static void main(String[] args){
 
-        StartDialog test = new StartDialog();
+        StartDialog gameSetupDialog = new StartDialog();
 
-        while(test.getPlayerOneType() == null || test.getPlayerTwoType() == null){
+        //Wait for the user to pick the player types before starting setup.
+        while(gameSetupDialog.getPlayerOneType() == null || gameSetupDialog.getPlayerTwoType() == null){
             try{
                 Thread.sleep(1000);
             }catch(InterruptedException interrupt){
@@ -30,7 +30,7 @@ public class Chess{
             }
         }
 
-        startSetup(test.getPlayerOneType(),test.getPlayerTwoType());
+        startSetup(gameSetupDialog.getPlayerOneType(),gameSetupDialog.getPlayerTwoType());
 
     }
 
@@ -76,6 +76,7 @@ public class Chess{
 
     }
 
+    //Depending on the type of player selected, sets up the players and their opponents.
     private static void playerSetup(String firstPlayerName, String secondPlayerName, Pieces whitePieces, Pieces blackPieces, Board board, String p1Type, String p2Type){
 
         switch(p1Type) {
@@ -107,16 +108,8 @@ public class Chess{
 
     }
 
-    public static void setCurrentTurn(String turn){
-        currentTurn = turn;
-    }
-
     public static String getCurrentTurn(){
         return currentTurn;
-    }
-
-    public static void setAlert(String alert){
-        alertMessage = alert;
     }
 
     public static String getAlert(){

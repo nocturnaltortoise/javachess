@@ -2,7 +2,11 @@ package uk.ac.sheffield.aca14st;
 
 import java.util.ArrayList;
 
-/**@author Simon Turner (aca14st) */
+/**
+ * Queen
+ * Class to represent the Queen piece in Chess.
+ * @author Simon Turner (aca14st)
+ */
 
 public class Queen extends Piece {
 
@@ -48,26 +52,26 @@ public class Queen extends Piece {
             checkSquares(x, y, x,i, vector);
         }
 
-        //+1.+1
+        //top right
         blocked = false;
         for(int i=getX()+1, j=getY()+1; (i<8 || j<8) && !blocked; i++,j++) {
             checkSquares(getX(), getY(), i, j, vector);
         }
 
-        //-1,-1
+        //bottom left
         blocked = false;
         for(int i=getX()-1, j=getY()-1; (i>-1 || j>-1) && !blocked; i--,j--){
             checkSquares(getX(), getY(), i,j, vector);
 
         }
 
-        //+1,-1
+        //bottom right
         blocked = false;
         for(int i=getX()+1, j=getY()-1 ;(i<8 || j>-1) && !blocked; i++,j--){
             checkSquares(getX(), getY(), i,j, vector);
         }
 
-        //-1,+1
+        //top left
         blocked = false;
         for(int i=getX()-1, j=getY()+1 ;(i>-1 || j<8) && !blocked; i--,j++){
             checkSquares(getX(), getY(), i,j, vector);

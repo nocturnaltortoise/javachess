@@ -3,6 +3,12 @@ package uk.ac.sheffield.aca14st;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * GraphicalDisplay
+ * Sets up and controls the layout of the main chess window.
+ * @author Simon Turner (aca14st)
+ */
+
 public class GraphicalDisplay extends JFrame implements Display {
 
     public void showPiecesOnBoard(Piece[][] piecesOnBoard){

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ * Aggressive Player
+ * Class for the aggressive version of the AI.
+ * @author Simon Turner (aca14st)
+ */
 public class AggressivePlayer extends Player{
 
     public AggressivePlayer(String name, Pieces pieces, Board board, Player opponent){
@@ -20,9 +25,12 @@ public class AggressivePlayer extends Player{
         int newX = aggressiveMove.getNewXPosition();
         int newY = aggressiveMove.getNewYPosition();
         Piece movingPiece = aggressiveMove.getPiece();
+        //Sets up the moving piece and the move it will make.
 
+        //if the target is occupied, take the target piece and move, otherwise just move.
         if(aggressiveMove.targetIsOccupied()){
             kingTaken = this.getBoard().getPiece(newX, newY) instanceof King;
+            //adds taken piece to a list and updates the label displaying the list.
             super.getTakenPieces().add(getBoard().getPiece(newX, newY));
             InfoPanel.getTakenPieceLabel().setText(super.takenPiecesToString(getTakenPieces()));
             this.getBoard().remove(newX, newY);
@@ -35,24 +43,26 @@ public class AggressivePlayer extends Player{
             this.getBoard().remove(initX, initY);
         }
 
-       try{
+        //Makes the AI take more time so the game isn't over immediately.
+        try{
            Thread.sleep(1500);
-       }catch(InterruptedException interrupt){
+        }catch(InterruptedException interrupt){
            Thread.currentThread().interrupt();
-       }
+        }
 
         ChessBoard.setUserState(UserState.FINISHED_CLICKING);
 
         return kingTaken;
     }
 
+    //Gets the highest value capturing move, or a random move if piece can't capture.
     private Move getAggressiveMove(Pieces pieces){
 
         ArrayList<Move> takingMoves = new ArrayList<>();
 
         for(Piece possiblePiece : pieces.getData()){
-            for(Move possibleMove : possiblePiece.availableMoves()){
-                if(possibleMove.targetIsOccupied()){
+            for(Move possibleMove : possiblePiece.availableMoves()) {
+                if (possibleMove.targetIsOccupied()) {
                     takingMoves.add(possibleMove);
                 }
             }
@@ -68,6 +78,7 @@ public class AggressivePlayer extends Player{
 
     }
 
+    //Gets a random move for a piece. If the random piece has no available moves, pick another piece.
     private Move getRandomMove(Piece randomPiece, Player player){
 
         Random randNumGen = new Random();
@@ -80,6 +91,7 @@ public class AggressivePlayer extends Player{
 
     }
 
+    //Generates a random number, selects a random friendly piece or a random hostile piece.
     private Piece getRandomPiece(Player player){
 
         Random randNumGen = new Random();
@@ -91,8 +103,4 @@ public class AggressivePlayer extends Player{
         }
 
     }
-
-
-
-
 }

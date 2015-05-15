@@ -2,6 +2,12 @@ package uk.ac.sheffield.aca14st;
 
 import java.util.Random;
 
+/**
+ * RandomPlayer
+ * Implements the random moves of the Random AI.
+ * @author Simon Turner (aca14st)
+ */
+
 public class RandomPlayer extends Player{
 
     public RandomPlayer(String name, Pieces pieces, Board board, Player opponent){
@@ -12,6 +18,8 @@ public class RandomPlayer extends Player{
     public boolean makeMove(){
         boolean kingTaken = false;
 
+        //Very Similar to AggressivePlayer, except our move is always random (no middleman method to
+        //check for better moves).
         Move randomMove = getRandomMove(getRandomPiece(this), this);
         int initX = randomMove.getCurrentXPosition();
         int initY = randomMove.getCurrentYPosition();

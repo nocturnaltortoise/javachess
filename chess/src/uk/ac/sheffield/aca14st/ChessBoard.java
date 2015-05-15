@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * ChessBoard
+ * Draws and handles the events from the chess board itself.
  * @author Simon Turner (aca14st)
  */
 public class ChessBoard extends JPanel implements ActionListener{
@@ -14,6 +16,7 @@ public class ChessBoard extends JPanel implements ActionListener{
     static UserState state = UserState.NOT_CLICKING;
     static int[][] clickCoordinates = new int[2][2];
 
+    //Sets up the basic chess board with alternating colours and the required buttons.
     public ChessBoard(){
         this.setLayout(new GridLayout(8, 8));
 
@@ -32,7 +35,6 @@ public class ChessBoard extends JPanel implements ActionListener{
         }
 
         setNormalBackground();
-//        this.setSize(500,500);
     }
 
     public static void showPiecesOnBoard(Piece[][] piecesOnBoard){
@@ -41,6 +43,7 @@ public class ChessBoard extends JPanel implements ActionListener{
         for(int i=0; i<chessSquares.length; i++){
             for(int j=0; j<chessSquares[i].length; j++){
                 String labelString;
+                //If null display nothing, otherwise get a unicode character for the piece.
                 if(piecesOnBoard[j][i] != null){
                     labelString = getChessUnicode(piecesOnBoard[j][i].toString());
                 }else{
@@ -57,6 +60,7 @@ public class ChessBoard extends JPanel implements ActionListener{
 
         setNormalBackground();
 
+        //This is needed to find where the clicked button is in the array.
         for(int i=0; i<chessSquares.length; i++){
             for(int j=0; j<chessSquares[i].length; j++){
                 if(event.getSource() == chessSquares[i][j]){
@@ -67,12 +71,14 @@ public class ChessBoard extends JPanel implements ActionListener{
                         state = UserState.FINISHED_CLICKING;
                     }
 
+                    //Highlights available move squares.
                     if(Chess.getChessBoard().getPiece(j,i) != null){
                         for(Move move : Chess.getChessBoard().getPiece(j,i).availableMoves()){
                             chessSquares[move.getNewYPosition()][move.getNewXPosition()].setBackground(Color.yellow);
                         }
                     }
 
+                    //Sets the coordinates of the clicked button in terms of chessSquares.
                     if(state == UserState.STARTED_CLICKING){
                         clickCoordinates[0][0] = j;
                         clickCoordinates[0][1] = i;
@@ -128,6 +134,7 @@ public class ChessBoard extends JPanel implements ActionListener{
         }
     }
 
+    //Colours squares alternating grey and white.
     private static void setNormalBackground(){
 
         for(int i=0; i<chessSquares.length; i++) {

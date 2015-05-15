@@ -2,7 +2,11 @@ package uk.ac.sheffield.aca14st;
 
 import java.util.ArrayList;
 
-/**@author Simon Turner (aca14st) */
+/**
+ * Knight
+ * Class to represent the Knight piece in Chess.
+ * @author Simon Turner (aca14st)
+ */
 
 public class Knight extends Piece {
 

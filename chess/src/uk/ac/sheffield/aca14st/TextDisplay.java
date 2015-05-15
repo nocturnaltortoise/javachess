@@ -1,6 +1,10 @@
 package uk.ac.sheffield.aca14st;
 
-/**@author Simon Turner (aca14st) */
+/**
+ * TextDisplay
+ * Prints out the board to the console.
+ * @author Simon Turner (aca14st)
+ */
 
 public class TextDisplay implements Display {
 

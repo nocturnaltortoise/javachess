@@ -27,6 +27,7 @@ public abstract class Player {
     private Pieces pieces;
     private Board board;
     private Player opponent;
+    //List of pieces taken by this player.
     private ArrayList<Piece> takenPieces = new ArrayList<>();
 
     public Player(String n, Pieces p, Board b, Player o) {
@@ -36,10 +37,12 @@ public abstract class Player {
         opponent = o;
     }
 
+    //Returns the pieces taken by this player.
     public ArrayList<Piece> getTakenPieces(){
         return takenPieces;
     }
 
+    //Used for displaying the chess pieces taken on screen as unicode.
     public String takenPiecesToString(ArrayList<Piece> pieces){
         String list = "";
         for(Piece piece : pieces){

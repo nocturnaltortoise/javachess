@@ -1,6 +1,10 @@
 package uk.ac.sheffield.aca14st;
 
-/**@author Simon Turner (aca14st) */
+/**
+ * Move
+ * Represents a move of a piece from one square to another.
+ * @author Simon Turner (aca14st)
+ */
 
 public class Move implements Comparable<Move>{
 
@@ -63,6 +67,7 @@ public class Move implements Comparable<Move>{
         return valueOne.compareTo(valueTwo);
     }
 
+    //returns the conventional value of a piece in chess.
     private int getPieceValue(Piece piece){
         switch(piece.getChar()){
             case 'p':
@@ -87,8 +92,6 @@ public class Move implements Comparable<Move>{
                 return 0;
         }
     }
-
-
 
     //Returns some basic info about a move - mostly useful for debugging.
     public String toString(){

@@ -1,6 +1,10 @@
 package uk.ac.sheffield.aca14st;
 
-/**@author Simon Turner (aca14st) */
+/**
+ * HumanPlayer
+ * Checks validity of moves for human players (as opposed to AI).
+ * @author Simon Turner (aca14st)
+ */
 
 public class HumanPlayer extends Player{
 
@@ -54,7 +58,7 @@ public class HumanPlayer extends Player{
             if(movingPiece.availableMoves().contains(playerMove) && movingPiece.getColour() == this.getPieces().getColour()){
                 if(targetOccupied && getBoard().getPiece(newX, newY).getColour() != getBoard().getPiece(initX, initY).getColour()){
                     super.getTakenPieces().add(getBoard().getPiece(newX, newY));
-                    InfoPanel.getTakenPieceLabel().setText(super.takenPiecesToString(getTakenPieces()) + super.takenPiecesToString(getOpponent().getTakenPieces()));
+                    InfoPanel.getTakenPieceLabel().setText(super.takenPiecesToString(getTakenPieces()));
                     getBoard().remove(newX, newY);
                 }
                 getBoard().getData()[newX][newY] = movingPiece;

@@ -25,20 +25,24 @@ public class Rook extends Piece {
         int y = getY();
         ArrayList<Move> vector = new ArrayList<>();
 
+        //vertically upwards
         for(int i=x+1;i<8 && !blocked;i++){
             checkSquares(x, y, i,y, vector);
         }
 
+        //vertically downwards
         blocked = false;
         for(int i=x-1;i>-1 && !blocked;i--){
             checkSquares(x, y,i,y, vector);
         }
 
+        //horizontally to the right
         blocked = false;
         for(int i=y+1;i<8 && !blocked;i++){
             checkSquares(x, y, x,i, vector);
         }
 
+        //horizontally to the left
         blocked = false;
         for(int i=y-1;i>-1 && !blocked;i--){
             checkSquares(x, y, x,i, vector);
